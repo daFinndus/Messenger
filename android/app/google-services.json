@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "533959909775",
+    "project_id": "swift-messenger-68de8",
+    "storage_bucket": "swift-messenger-68de8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:533959909775:android:84a536caa641b25cababfa",
+        "android_client_info": {
+          "package_name": "dafinndus.de.messenger"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBct0M1Bl1lFSrp02KunsSku9gAzzbkCx4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

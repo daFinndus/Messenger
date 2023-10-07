@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
-import 'package:messenger/widgets/greet_page.dart';
+import 'package:messenger/auth_page.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const MyApp());
 }
 
@@ -43,9 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: const Center(
-        child: Column(
-          children: [GreetPage()],
-        ),
+        child: AuthPage(),
       ),
     );
   }
