@@ -38,9 +38,10 @@ class _SettingsPageState extends State<SettingPage> {
                 leading: CircleAvatar(
                   backgroundImage: AssetImage("assets/images/Moktriplea.png"),
                 ),
-                  trailing: Icon(Icons.edit, color: Colors.white,)
+                  trailing: Icon(Icons.edit, color: Colors.white,),
               ),
             ),
+            const Divider(height: 10, thickness: 1,),
             CustomSettingBox(title: "Themes", function: FirebaseAuth.instance.signOut),
             CustomSettingBox(title: "Change Password", function: FirebaseAuth.instance.signOut),
             CustomSettingBox(title: "Language", function: FirebaseAuth.instance.signOut),
