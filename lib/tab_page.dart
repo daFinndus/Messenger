@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 import 'package:messenger/widgets/chat_page.dart';
 import 'package:messenger/widgets/empty_page.dart';
+import 'package:messenger/widgets/setting_page.dart';
 
 class TabPage extends StatelessWidget {
   const TabPage({super.key});
@@ -30,7 +31,7 @@ class TabPage extends StatelessWidget {
             children: [
               EmptyPage(),
               ChatPage(),
-              EmptyPage(),
+              SettingPage(),
             ],
           ),
         ),
