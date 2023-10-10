@@ -83,6 +83,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 32.0),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [

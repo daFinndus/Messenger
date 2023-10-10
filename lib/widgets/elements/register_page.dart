@@ -102,6 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 32.0),
       padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
       child: Column(
         children: [

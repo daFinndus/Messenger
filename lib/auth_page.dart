@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messenger/tab_page.dart';
-import 'package:messenger/widgets/chat_page.dart';
 import 'package:messenger/widgets/greet_page.dart';
 
 class AuthPage extends StatelessWidget {

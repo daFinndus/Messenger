@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/app_colors.dart';
 import 'package:messenger/widgets/components/button_text.dart';
 import 'package:messenger/widgets/elements/login_page.dart';
 import 'package:messenger/widgets/elements/register_page.dart';
@@ -21,21 +22,30 @@ class _GreetPage extends State<GreetPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Visibility(visible: _greetState, child: const LoginPage()),
-        Visibility(visible: !_greetState, child: const RegisterPage()),
-        Visibility(
-          visible: _greetState,
-          child: CustomTextButton(
-              title: "Not a user yet? Sign up.", function: greetStateToggle),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primaryColor,
+        title: Text(
+          "Swift Messenger",
+          style: TextStyle(color: AppColors.brightColor),
         ),
-        Visibility(
-          visible: !_greetState,
-          child: CustomTextButton(
-              title: "User already? Sign in.", function: greetStateToggle),
-        )
-      ],
+      ),
+      body: Column(
+        children: [
+          Visibility(visible: _greetState, child: const LoginPage()),
+          Visibility(visible: !_greetState, child: const RegisterPage()),
+          Visibility(
+            visible: _greetState,
+            child: CustomTextButton(
+                title: "Not a user yet? Sign up.", function: greetStateToggle),
+          ),
+          Visibility(
+            visible: !_greetState,
+            child: CustomTextButton(
+                title: "User already? Sign in.", function: greetStateToggle),
+          )
+        ],
+      ),
     );
   }
 }
