@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 import 'package:messenger/widgets/chat_page.dart';
-import 'package:messenger/widgets/empty_page.dart';
 import 'package:messenger/widgets/setting_page.dart';
 
 class TabPage extends StatelessWidget {
@@ -11,13 +10,12 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryColor,
             bottom: const TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.access_alarm)),
                 Tab(icon: Icon(Icons.chat)),
                 Tab(icon: Icon(Icons.settings)),
               ],
@@ -29,7 +27,6 @@ class TabPage extends StatelessWidget {
           ),
           body: const TabBarView(
             children: [
-              EmptyPage(),
               ChatPage(),
               SettingPage(),
             ],

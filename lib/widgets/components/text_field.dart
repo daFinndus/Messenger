@@ -19,13 +19,14 @@ class CustomTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: obscure,
-        style: TextStyle(
-            fontWeight: FontWeight.bold, color: AppColors.darkColor),
+        style:
+            TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkColor),
         decoration: InputDecoration(
-            border: const OutlineInputBorder(),
-            labelText: title,
-            labelStyle: TextStyle(
-                fontWeight: FontWeight.bold, color: AppColors.darkColor)),
+          border: const OutlineInputBorder(),
+          labelText: title,
+          labelStyle: TextStyle(
+              fontWeight: FontWeight.bold, color: AppColors.darkColor),
+        ),
       ),
     );
   }

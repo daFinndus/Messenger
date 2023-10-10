@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text("No user found with email : $emailController"),
+          title: Text("No user found with email : '$emailController'"),
         );
       },
     );
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          title: Text("Wrong password."),
+          title: Text("Wrong password"),
         );
       },
     );
@@ -83,7 +83,6 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 32.0),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
@@ -93,7 +92,6 @@ class _LoginPageState extends State<LoginPage> {
               title: "Password", obscure: true, controller: passwordController),
           Container(
             width: 384.0,
-            margin: const EdgeInsets.only(top: 24.0),
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
             child: CustomBoxButton(title: "Sign in", function: loginUser),
           ),

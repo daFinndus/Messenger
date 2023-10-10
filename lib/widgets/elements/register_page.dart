@@ -68,8 +68,7 @@ class _RegisterPageState extends State<RegisterPage> {
         builder: (context) {
           return const AlertDialog(
             title: Text(
-              "'Password' and 'Confirm Password' are not equal.",
-              style: TextStyle(fontSize: 12.0),
+              "'Password' and 'Confirm Password' are not the same",
             ),
           );
         });
@@ -81,7 +80,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          title: Text("Password is too weak."),
+          title: Text("Password is too weak, please use at least 6 characters"),
         );
       },
     );
@@ -93,7 +92,7 @@ class _RegisterPageState extends State<RegisterPage> {
       context: context,
       builder: (context) {
         return const AlertDialog(
-          title: Text("This email is already in use."),
+          title: Text("This email is already in use"),
         );
       },
     );
@@ -102,7 +101,6 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 32.0),
       padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
       child: Column(
         children: [
@@ -115,10 +113,10 @@ class _RegisterPageState extends State<RegisterPage> {
               obscure: true,
               controller: confirmPasswordController),
           Container(
-              width: 384.0,
-              margin: const EdgeInsets.only(top: 24.0),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-              child: CustomBoxButton(title: "Sign up", function: registerUser))
+            width: 384.0,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
+            child: CustomBoxButton(title: "Sign up", function: registerUser),
+          ),
         ],
       ),
     );
