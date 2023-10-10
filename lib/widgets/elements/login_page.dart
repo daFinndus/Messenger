@@ -35,14 +35,20 @@ class _LoginPageState extends State<LoginPage> {
     } on FirebaseAuthException catch (e) {
       // Get rid of the loading circle if an error occurs
       Navigator.pop(context);
-      // Get rid of the loading circle if an error occurs
       if (e.code == "user-not-found") {
         userNotFoundMessage();
       } else if (e.code == "wrong-password") {
         wrongPasswordMessage();
       } else if (e.code == "invalid-email") {
       } else {
-        AlertDialog(title: Text(e.code));
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text(e.code),
+            );
+          },
+        );
       }
     }
   }

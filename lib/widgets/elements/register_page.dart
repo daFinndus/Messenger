@@ -33,7 +33,11 @@ class _RegisterPageState extends State<RegisterPage> {
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
+        // Get rid of the loading circle if signup is complete
+        Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
+        // Get rid of the loading circle if an error occurs
+        Navigator.pop(context);
         if (e.code == "weak-password") {
           weakPasswordMessage();
         } else if (e.code == "email-already-in-use") {
@@ -50,11 +54,7 @@ class _RegisterPageState extends State<RegisterPage> {
               );
             },
           );
-          print(e);
         }
-      } finally {
-        // Get rid of the loading circle if login is complete
-        Navigator.pop(context);
       }
     } else {
       wrongDuplicatePasswordMessage();

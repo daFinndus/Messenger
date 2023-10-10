@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
-class ChatBox extends StatelessWidget {
+class ChatBoxDemo extends StatelessWidget {
   final String title;
   final String imagePath;
 
-  const ChatBox({super.key, required this.title, required this.imagePath});
+  const ChatBoxDemo({super.key, required this.title, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

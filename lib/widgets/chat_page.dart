@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/widgets/components/chat_box.dart';
+import 'package:messenger/widgets/components/chat_box_demo.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -15,10 +15,10 @@ class _ChatPageState extends State<ChatPage> {
       margin: const EdgeInsets.all(16.0),
       child: const Column(
         children: [
-          ChatBox(title: "Mary", imagePath: "assets/images/mary.png"),
-          ChatBox(title: "Leon", imagePath: "assets/images/leon.png"),
-          ChatBox(title: "Rajesh", imagePath: "assets/images/rajesh.png"),
-          ChatBox(title: "Thomas", imagePath: "assets/images/thomas.png"),
+          ChatBoxDemo(title: "Mary", imagePath: "assets/images/mary.png"),
+          ChatBoxDemo(title: "Leon", imagePath: "assets/images/leon.png"),
+          ChatBoxDemo(title: "Rajesh", imagePath: "assets/images/rajesh.png"),
+          ChatBoxDemo(title: "Thomas", imagePath: "assets/images/thomas.png"),
         ],
       ),
     );
