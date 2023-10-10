@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/chat_box_demo.dart';
 import 'package:messenger/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ChatPage extends StatefulWidget {
   const ChatPage({super.key});
@@ -13,14 +15,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          "Chats",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: AppColors.brightColor),
-        ),
-      ),
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(16.0),

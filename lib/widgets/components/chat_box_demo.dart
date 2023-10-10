@@ -27,7 +27,7 @@ class ChatBoxDemo extends StatelessWidget {
             style: TextStyle(
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
-                color: AppColors.darkColor),
+                color: AppColors.brightColor),
           ),
         ],
       ),

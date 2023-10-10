@@ -37,16 +37,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          "Swift Messenger",
-          style: TextStyle(
-              fontWeight: FontWeight.bold, color: AppColors.brightColor),
-        ),
-      ),
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: AuthPage(),
       ),
     );
