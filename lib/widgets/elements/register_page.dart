@@ -34,10 +34,6 @@ class _RegisterPageState extends State<RegisterPage> {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
 
-        _fireStore.collection('users').doc(userCredential.user!uid).set({
-          'uid : userCrede'
-        });
-
         // Get rid of the loading circle if signup is complete
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
