@@ -16,7 +16,6 @@ class _CustomSettingBoxState extends State<CustomSettingBox> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 512.0,
       height: 64.0,
       child: ElevatedButton(
         onPressed: () => widget.function(),

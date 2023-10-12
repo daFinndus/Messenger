@@ -107,7 +107,7 @@ class _RegisterPageState extends State<RegisterPage> {
           CustomTextField(
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
-              title: "Password", obscure: true, controller: passwordController),
+              title: "Register", obscure: true, controller: passwordController),
           CustomTextField(
               title: "Confirm Password",
               obscure: true,

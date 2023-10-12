@@ -1,28 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/app_colors.dart';
 import 'package:messenger/widgets/components/chat_box_demo.dart';
 
-class ChatPage extends StatefulWidget {
-  const ChatPage({super.key});
+class ChatList extends StatefulWidget {
+  const ChatList({super.key});
 
   @override
-  State<ChatPage> createState() => _ChatPageState();
+  State<ChatList> createState() => _ChatListState();
 }
 
-class _ChatPageState extends State<ChatPage> {
+class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.brightColor,
-        title: Text(
-          'Chats',
-          style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.darkColor),
-        ),
-      ),
       body: Center(
         child: Container(
           margin: const EdgeInsets.all(16.0),

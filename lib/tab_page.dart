@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
-import 'package:messenger/widgets/chat_page.dart';
+import 'package:messenger/widgets/chat_list.dart';
 import 'package:messenger/widgets/setting_page.dart';
 
 class TabPage extends StatelessWidget {
@@ -27,7 +27,7 @@ class TabPage extends StatelessWidget {
           ),
           body: const TabBarView(
             children: [
-              ChatPage(),
+              ChatList(),
               SettingPage(),
             ],
           ),
