@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
@@ -17,8 +18,16 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
+  }
+
   // Function to perform the registration for the user
-  void registerUser() async {
+  Future registerUser() async {
     // Check if password and confirm password are the same
     if (passwordController.text == confirmPasswordController.text) {
       // Widget to display the process -> instant feedback
@@ -32,7 +41,12 @@ class _RegisterPageState extends State<RegisterPage> {
 
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
+            email: emailController.text.trim(), password: passwordController.text.trim()
+        );
+
+        addUserDetails(
+          emailController.text.trim(),
+        );
 
         // Get rid of the loading circle if signup is complete
         Navigator.pop(context);
@@ -60,6 +74,14 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       wrongDuplicatePasswordMessage();
     }
+
+  }
+
+  Future addUserDetails(String email) async {
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).set({
+      'email': email,
+    });
+
   }
 
   // Display AlertDialog when the passwords aren't the same
@@ -108,7 +130,7 @@ class _RegisterPageState extends State<RegisterPage> {
           CustomTextField(
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
-              title: "Register", obscure: true, controller: passwordController),
+              title: "Password", obscure: true, controller: passwordController),
           CustomTextField(
               title: "Confirm Password",
               obscure: true,
