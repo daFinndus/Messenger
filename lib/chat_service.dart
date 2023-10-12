@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:messenger/model/message.dart';
 import 'package:flutter/material.dart';
 
+class ChatService extends ChangeNotifier {
 //get instance of auth and firestore
 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
@@ -16,8 +17,8 @@ Future<void> sendMessage(String receiverId, String message) async {
   final Timestamp timestamp = Timestamp.now();
   // create a new message
   Message newMessage = Message(
-    senderId: CurrentUserId,
-    senderEmail: CurrentUserEmail,
+    senderId: currentUserId,
+    senderEmail: currentUserEmail,
     receiverId: receiverId,
     timestamp: timestamp,
     message: message,
@@ -30,4 +31,4 @@ Future<void> sendMessage(String receiverId, String message) async {
 //get messages
 }
 
-}
+
