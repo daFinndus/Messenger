@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
@@ -13,12 +14,15 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final firstNameController = TextEditingController();
+  final lastNameController =TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
+
   // Function to perform the registration for the user
-  void registerUser() async {
+  Future registerUser() async {
     // Check if password and confirm password are the same
     if (passwordController.text == confirmPasswordController.text) {
       // Widget to display the process -> instant feedback
@@ -32,7 +36,15 @@ class _RegisterPageState extends State<RegisterPage> {
 
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
+            email: emailController.text, password: passwordController.text
+        );
+
+        addUserDetails(
+          firstNameController.text,
+          lastNameController.text,
+          emailController.text,
+        );
+
         // Get rid of the loading circle if signup is complete
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
@@ -59,6 +71,16 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       wrongDuplicatePasswordMessage();
     }
+
+  }
+
+  Future addUserDetails(String email, String firstName, String lastName) async {
+    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).set({
+      'email': email,
+      'firstName': firstName,
+      'lastName': lastName,
+    });
+
   }
 
   // Display AlertDialog when the passwords aren't the same
@@ -105,9 +127,13 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         children: [
           CustomTextField(
+              title: 'First Name', obscure: false, controller: firstNameController),
+          CustomTextField(
+              title: 'Last Name', obscure: false, controller: lastNameController),
+          CustomTextField(
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
-              title: "Register", obscure: true, controller: passwordController),
+              title: "Password", obscure: true, controller: passwordController),
           CustomTextField(
               title: "Confirm Password",
               obscure: true,

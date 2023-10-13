@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+
 class ChatPage extends StatelessWidget {
   final String title;
   final String imagePath;
+
 
   const ChatPage({super.key, required this.title, required this.imagePath});
 
