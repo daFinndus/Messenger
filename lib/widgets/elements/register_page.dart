@@ -20,15 +20,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  @override
-  void dispose() {
-    firstNameController.dispose();
-    lastNameController.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-    confirmPasswordController.dispose();
-    super.dispose();
-  }
 
   // Function to perform the registration for the user
   Future registerUser() async {
@@ -45,13 +36,13 @@ class _RegisterPageState extends State<RegisterPage> {
 
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text.trim(), password: passwordController.text.trim()
+            email: emailController.text, password: passwordController.text
         );
 
         addUserDetails(
-          firstNameController.text.trim(),
-          lastNameController.text.trim(),
-          emailController.text.trim(),
+          firstNameController.text,
+          lastNameController.text,
+          emailController.text,
         );
 
         // Get rid of the loading circle if signup is complete
