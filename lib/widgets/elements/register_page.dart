@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:messenger/widgets/elements/personal_data_page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,11 +16,10 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final firstNameController = TextEditingController();
-  final lastNameController =TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-
 
   // Function to perform the registration for the user
   Future registerUser() async {
@@ -34,17 +34,12 @@ class _RegisterPageState extends State<RegisterPage> {
             );
           });
 
+      // Sign up user with firebase
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text
-        );
+            email: emailController.text, password: passwordController.text);
 
-        addUserDetails(
-          firstNameController.text,
-          lastNameController.text,
-          emailController.text,
-        );
-
+        addUserDetails(emailController.text);
         // Get rid of the loading circle if signup is complete
         Navigator.pop(context);
       } on FirebaseAuthException catch (e) {
@@ -71,16 +66,29 @@ class _RegisterPageState extends State<RegisterPage> {
     } else {
       wrongDuplicatePasswordMessage();
     }
-
   }
 
-  Future addUserDetails(String email, String firstName, String lastName) async {
-    await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).set({
-      'email': email,
-      'firstName': firstName,
-      'lastName': lastName,
-    });
+  // Route to personal_data_page.dart
+  void routeToPersonalDataPage() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const PersonalDataPage(),
+      ),
+    );
+  }
 
+  // Function to add user details to the database
+  Future addUserDetails(String email) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .set({
+        'email': email,
+      });
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   // Display AlertDialog when the passwords aren't the same
@@ -126,10 +134,6 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
       child: Column(
         children: [
-          CustomTextField(
-              title: 'First Name', obscure: false, controller: firstNameController),
-          CustomTextField(
-              title: 'Last Name', obscure: false, controller: lastNameController),
           CustomTextField(
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
