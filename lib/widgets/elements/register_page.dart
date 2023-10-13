@@ -14,12 +14,16 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final firstNameController = TextEditingController();
+  final lastNameController =TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
   @override
   void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     confirmPasswordController.dispose();
@@ -45,6 +49,8 @@ class _RegisterPageState extends State<RegisterPage> {
         );
 
         addUserDetails(
+          firstNameController.text.trim(),
+          lastNameController.text.trim(),
           emailController.text.trim(),
         );
 
@@ -77,9 +83,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
   }
 
-  Future addUserDetails(String email) async {
+  Future addUserDetails(String email, String firstName, String lastName) async {
     await FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser?.uid).set({
       'email': email,
+      'firstName': firstName,
+      'lastName': lastName,
     });
 
   }
@@ -127,6 +135,10 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
       child: Column(
         children: [
+          CustomTextField(
+              title: 'First Name', obscure: false, controller: firstNameController),
+          CustomTextField(
+              title: 'Last Name', obscure: false, controller: lastNameController),
           CustomTextField(
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
