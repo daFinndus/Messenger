@@ -15,7 +15,11 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
 
   // Function to perform the login for the user
+<<<<<<< Updated upstream
   void loginUser() async {
+=======
+  Future loginUser() async {
+>>>>>>> Stashed changes
     // Widget to display the process -> instant feedback
     showDialog(
       context: context,
@@ -29,7 +33,12 @@ class _LoginPageState extends State<LoginPage> {
     // Sign in user with firebase
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
+<<<<<<< Updated upstream
           email: emailController.text, password: passwordController.text);
+=======
+          email: emailController.text.trim(),
+          password: passwordController.text.trim());
+>>>>>>> Stashed changes
       // Get rid of the loading circle if login is complete
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {

@@ -13,6 +13,11 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+<<<<<<< Updated upstream
+=======
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+>>>>>>> Stashed changes
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
@@ -23,18 +28,29 @@ class _RegisterPageState extends State<RegisterPage> {
     if (passwordController.text == confirmPasswordController.text) {
       // Widget to display the process -> instant feedback
       showDialog(
-          context: context,
-          builder: (context) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          });
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      );
 
+      // Sign up user with firebase
       try {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
+<<<<<<< Updated upstream
+=======
+
+        // Function to add user details to the firestore database
+        addUserDetails(emailController.text);
+
+>>>>>>> Stashed changes
         // Get rid of the loading circle if signup is complete
         Navigator.pop(context);
+
+        //Add here route to personal_data_page.dart
       } on FirebaseAuthException catch (e) {
         // Get rid of the loading circle if an error occurs
         Navigator.pop(context);
@@ -43,6 +59,7 @@ class _RegisterPageState extends State<RegisterPage> {
         } else if (e.code == "email-already-in-use") {
           emailInUseMessage();
         } else {
+          // Display a dialog containing the error message
           showDialog(
             context: context,
             builder: (context) {
@@ -57,8 +74,24 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       }
     } else {
+      // If 'password' and 'confirm password' aren't the same
       wrongDuplicatePasswordMessage();
     }
+<<<<<<< Updated upstream
+=======
+  }
+
+  // Function to add user details to the firestore database
+  Future addUserDetails(String email) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .set(
+      {
+        'email': email,
+      },
+    );
+>>>>>>> Stashed changes
   }
 
   // Display AlertDialog when the passwords aren't the same
@@ -105,6 +138,17 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         children: [
           CustomTextField(
+<<<<<<< Updated upstream
+=======
+              title: 'First Name',
+              obscure: false,
+              controller: firstNameController),
+          CustomTextField(
+              title: 'Last Name',
+              obscure: false,
+              controller: lastNameController),
+          CustomTextField(
+>>>>>>> Stashed changes
               title: "Email", obscure: false, controller: emailController),
           CustomTextField(
               title: "Register", obscure: true, controller: passwordController),

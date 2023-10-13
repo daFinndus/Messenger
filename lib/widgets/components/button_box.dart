@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+
+// Custom elevated button
 class CustomBoxButton extends StatefulWidget {
   final String title;
   final Function function;

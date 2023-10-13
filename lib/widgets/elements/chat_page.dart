@@ -23,6 +23,7 @@ class ChatPage extends StatelessWidget {
         ),
         backgroundColor: AppColors.primaryColor,
       ),
+      // Here should be the chat elements
     );
   }
 }

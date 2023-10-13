@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 import 'package:messenger/widgets/elements/chat_page.dart';
 
+// Custom chat box for the chat list
 class ChatBoxDemo extends StatefulWidget {
   final String title;
   final String imagePath;

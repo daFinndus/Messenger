@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+// Custom text button
 class CustomTextButton extends StatefulWidget {
   final String title;
   final Function function;

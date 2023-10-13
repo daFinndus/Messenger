@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+// Custom elevated button for the settings page
 class CustomSettingBox extends StatefulWidget {
   final String title;
   final Function function;

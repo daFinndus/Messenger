@@ -14,6 +14,9 @@ class ImprintPage extends StatelessWidget {
           style: TextStyle(color: AppColors.brightColor),
         ),
       ),
+      body: const Column(
+        children: [Text("This app is made by Darren and Finn. ~ 05.10.2023")],
+      ),
     );
   }
 }

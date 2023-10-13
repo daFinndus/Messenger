@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+// Custom widget with a gesture detector for the settings page
 class CustomSettingCard extends StatefulWidget {
   final String title; // Title of the setting card
   final String imagePath; // Image path of the setting card

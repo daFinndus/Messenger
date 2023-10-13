@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/app_colors.dart';
 
+// Custom text field
 class CustomTextField extends StatelessWidget {
   final String title;
   final TextEditingController controller;
