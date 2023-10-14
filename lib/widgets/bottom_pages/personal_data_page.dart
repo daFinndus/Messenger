@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/tab_page.dart';
+import 'package:messenger/widgets/tab_page.dart';
 import 'package:messenger/widgets/components/button_text.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';

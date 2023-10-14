@@ -1,11 +1,9 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
+import 'package:messenger/widgets/bottom_pages/personal_data_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:messenger/widgets/elements/personal_data_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/app_colors.dart';
+import 'package:messenger/variables/app_colors.dart';
 
-class ThemePage extends StatelessWidget {
-  const ThemePage({super.key});
+class EditProfilePage extends StatelessWidget {
+  const EditProfilePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class ThemePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          "Themes",
+          "Edit Profile",
           style: TextStyle(color: AppColors.brightColor),
         ),
       ),
