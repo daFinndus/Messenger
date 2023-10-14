@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/app_colors.dart';
-import 'package:messenger/widgets/chat_list.dart';
-import 'package:messenger/widgets/setting_page.dart';
+import 'package:messenger/variables/app_colors.dart';
+import 'package:messenger/widgets/top_pages/chat_list_page.dart';
+import 'package:messenger/widgets/top_pages/setting_page.dart';
 
 class TabPage extends StatelessWidget {
   const TabPage({super.key});

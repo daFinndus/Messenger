@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/app_colors.dart';
+import 'package:messenger/variables/app_colors.dart';
 
-class ImprintPage extends StatelessWidget {
-  const ImprintPage({super.key});
+class ChangePasswordPage extends StatelessWidget {
+  const ChangePasswordPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +10,7 @@ class ImprintPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          "Imprint",
+          "Change Password",
           style: TextStyle(color: AppColors.brightColor),
         ),
       ),

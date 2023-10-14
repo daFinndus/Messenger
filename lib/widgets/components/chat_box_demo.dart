@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/app_colors.dart';
-import 'package:messenger/widgets/elements/chat_page.dart';
+import 'package:messenger/variables/app_colors.dart';
+import 'package:messenger/widgets/bottom_pages/chat_page.dart';
 
 class ChatBoxDemo extends StatefulWidget {
   final String title;
