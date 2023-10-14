@@ -6,7 +6,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PersonalDataPage extends StatefulWidget {
-  const PersonalDataPage({super.key});
+  final String email;
+  final String password;
+
+  const PersonalDataPage({
+    super.key,
+    required this.email,
+    required this.password,
+  });
 
   @override
   State<PersonalDataPage> createState() => _PersonalDataPageState();
@@ -15,33 +22,69 @@ class PersonalDataPage extends StatefulWidget {
 class _PersonalDataPageState extends State<PersonalDataPage> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
-  final birthdayController = TextEditingController();
 
+  // Function to add personal user details and register the user
+  void setupUser(String firstName, String lastName) {
+    addUserDetails(firstNameController.text, lastNameController.text);
+    registerUser();
+  }
+
+  // Function to add the personal user details
   Future addUserDetails(String firstName, String lastName) async {
     try {
       await FirebaseFirestore.instance
-          .collection('users')
+          .collection("users")
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .set(
         {
-          'firstName': firstName,
-          'lastName': lastName,
+          "email": widget.email,
+          "firstName": firstName,
+          "lastName": lastName,
         },
       );
-      routeToTabPage();
     } on Exception catch (e) {
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text(
-              "Error in registering user data $e",
-              style: const TextStyle(fontSize: 12.0),
-            ),
-          );
-        },
-      );
+      showErrorMessage(e.toString());
     }
+  }
+
+  // Display AlertDialog with a given String
+  void showErrorMessage(String text) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(text),
+        );
+      },
+    );
+  }
+
+  // Display AlertDialog when the password is too weak
+  void weakPasswordMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text(
+            "Password is too weak, please use at least 6 characters",
+          ),
+        );
+      },
+    );
+  }
+
+  // Display AlertDialog when the given mail address is already in use
+  void emailInUseMessage() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const AlertDialog(
+          title: Text(
+            "This email is already in use",
+          ),
+        );
+      },
+    );
   }
 
   // Route to personal_data_page.dart
@@ -51,6 +94,38 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
         builder: (context) => const TabPage(),
       ),
     );
+  }
+
+  // Create user with email and password
+  Future registerUser() async {
+    // Widget to display the process -> instant feedback
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
+
+    // Create user with firebase
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: widget.email, password: widget.password);
+
+      // Deactivate progress indicator when finished creating user
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // Deactivate progress indicator when finding an error
+      Navigator.pop(context);
+      if (e.code == "weak-password") {
+        weakPasswordMessage();
+      } else if (e.code == "email-already-in-use") {
+        emailInUseMessage();
+      } else {
+        showErrorMessage(e.code);
+      }
+    }
   }
 
   @override
@@ -69,9 +144,12 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
               obscure: false,
               controller: lastNameController),
           CustomTextButton(
-              title: "Done",
-              function: () => addUserDetails(
-                  firstNameController.text, lastNameController.text))
+            title: "Sign up",
+            function: () => setupUser(
+              firstNameController.text,
+              lastNameController.text,
+            ),
+          )
         ],
       ),
     );
