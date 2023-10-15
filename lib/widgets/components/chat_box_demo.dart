@@ -26,7 +26,7 @@ class _ChatBoxDemoState extends State<ChatBoxDemo> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => routeToChat(
-          ChatPage(title: widget.title, imagePath: widget.imagePath)),
+          ChatPage(title: widget.title, imagePath: widget.imagePath, receiverUserEmail: '', receiverUserID: '',)),
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 0.0),
         padding: const EdgeInsets.all(16.0),
