@@ -77,11 +77,18 @@ class _RegisterPageState extends State<RegisterPage> {
       child: Column(
         children: [
           CustomTextField(
-              title: "Email", obscure: false, controller: emailController),
+              icon: Icons.email,
+              text: "Email",
+              obscure: false,
+              controller: emailController),
           CustomTextField(
-              title: "Password", obscure: true, controller: passwordController),
+              icon: Icons.password,
+              text: "Password",
+              obscure: true,
+              controller: passwordController),
           CustomTextField(
-              title: "Confirm Password",
+              icon: Icons.password_outlined,
+              text: "Confirm Password",
               obscure: true,
               controller: confirmPasswordController),
           CustomBoxButton(title: "Next", function: goToNextPage),
