@@ -12,18 +12,14 @@ class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Container(
-          margin: const EdgeInsets.all(16.0),
-          child: const Column(
-            children: [
-              ChatBoxDemo(title: "Mary", imagePath: "assets/images/mary.png"),
-              ChatBoxDemo(title: "Leon", imagePath: "assets/images/leon.png"),
-              ChatBoxDemo(title: "Raj", imagePath: "assets/images/rajesh.png"),
-              ChatBoxDemo(title: "Tom", imagePath: "assets/images/thomas.png"),
-            ],
-          ),
-        ),
+      body: ListView(
+        padding: const EdgeInsets.all(8.0),
+        children: const <Widget>[
+          ChatBoxDemo(title: "Mary", imagePath: "assets/images/mary.png"),
+          ChatBoxDemo(title: "Leon", imagePath: "assets/images/leon.png"),
+          ChatBoxDemo(title: "Raj", imagePath: "assets/images/rajesh.png"),
+          ChatBoxDemo(title: "Tom", imagePath: "assets/images/thomas.png"),
+        ],
       ),
     );
   }
