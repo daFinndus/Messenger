@@ -16,6 +16,7 @@ class _CustomBoxButtonState extends State<CustomBoxButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 384.0,
       margin: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
       child: ElevatedButton(
