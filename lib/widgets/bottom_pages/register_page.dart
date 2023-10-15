@@ -84,11 +84,7 @@ class _RegisterPageState extends State<RegisterPage> {
               title: "Confirm Password",
               obscure: true,
               controller: confirmPasswordController),
-          Container(
-            width: 384.0,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
-            child: CustomBoxButton(title: "Next", function: goToNextPage),
-          ),
+          CustomBoxButton(title: "Next", function: goToNextPage),
         ],
       ),
     );
