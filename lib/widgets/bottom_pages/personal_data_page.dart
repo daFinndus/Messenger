@@ -180,7 +180,7 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
                 obscure: false,
                 controller: lastNameController),
             CustomDatePicker(
-              text: "Your Text Here",
+              text: "Please enter your birthday",
               onDateSelected: handleDateSelected, // Pass the callback function
             ),
             CustomBoxButton(
