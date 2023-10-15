@@ -27,26 +27,23 @@ class _SettingsPageState extends State<SettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            CustomSettingCard(
-                title: "Darren",
-                imagePath: "assets/images/darren.jpg",
-                function: () => routeToPage(const EditProfilePage())),
-            CustomSettingBox(
-                title: "Themes",
-                function: () => routeToPage(const ThemePage())),
-            CustomSettingBox(
-                title: "Change Password",
-                function: () => routeToPage(const ChangePasswordPage())),
-            CustomSettingBox(
-                title: "Imprint",
-                function: () => routeToPage(const ImprintPage())),
-            CustomSettingBox(
-                title: "Sign Out", function: FirebaseAuth.instance.signOut),
-          ],
-        ),
+      body: ListView(
+        children: <Widget>[
+          CustomSettingCard(
+              title: "Darren",
+              imagePath: "assets/images/darren.jpg",
+              function: () => routeToPage(const EditProfilePage())),
+          CustomSettingBox(
+              title: "Themes", function: () => routeToPage(const ThemePage())),
+          CustomSettingBox(
+              title: "Change Password",
+              function: () => routeToPage(const ChangePasswordPage())),
+          CustomSettingBox(
+              title: "Imprint",
+              function: () => routeToPage(const ImprintPage())),
+          CustomSettingBox(
+              title: "Sign Out", function: FirebaseAuth.instance.signOut),
+        ],
       ),
     );
   }
