@@ -33,7 +33,7 @@ class _SettingsPageState extends State<SettingPage> {
     );
   }
 
-  // Bad solution, needs a fix
+  // Function to display first name in settings - Bad solution, needs a fix
   void updateData(String field) {
     FirebaseFirestore.instance
         .collection("users")
