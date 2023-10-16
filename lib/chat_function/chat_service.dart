@@ -25,10 +25,32 @@ Future<void> sendMessage(String receiverId, String message) async {
   );
 
   // construct chat room id from current user id and receiver id
+  List<String> ids = [currentUserId, receiverId];
+  ids.sort(); //sort the ids (this ensures the chat room id is always the same for any pair of people
+  String chatRoomId = ids.join(
+    "_");//combine the ids into a single string to use a chatroomID
 
   //add new message to database
+  await _fireStore
+  .collection('chat_rooms')
+  .doc(chatRoomId)
+  .collection('messages')
+  .add(newMessage.toMap());
 }
 //get messages
+Stream<QuerySnapshot> getMessages(String userId, String otherUserId) {
+  //construct chat room id from user ids
+  List<String> ids = [userId, otherUserId];
+  ids.sort();
+  String chatRoomId = ids.join("_");
+
+  return _fireStore
+      .collection('chat_rooms')
+      .doc(chatRoomId)
+      .collection('messages')
+      .orderBy('timestamp', descending: false)
+      .snapshots();
+}
 }
 
 
