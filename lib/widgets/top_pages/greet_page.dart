@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/variables/app_colors.dart';
+import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/widgets/components/button_text.dart';
 import 'package:messenger/widgets/bottom_pages/login_page.dart';
 import 'package:messenger/widgets/bottom_pages/register_page.dart';

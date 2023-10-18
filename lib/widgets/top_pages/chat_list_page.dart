@@ -15,12 +15,13 @@ class _ChatListState extends State<ChatList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: _buildUserList(),
+    return Scaffold(
+      body: _buildUserList(),
     );
   }
 
 // build a list of users except for the current logged in user
-  Widget _buildUserList(DocumentSnapshot document) {
+  Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
         stream: FirebaseFirestore.instance.collection('users').snapshots(),
         builder: (context, snapshot) {
@@ -52,7 +53,7 @@ class _ChatListState extends State<ChatList> {
               context,
               MaterialPageRoute(
                 builder: (context) => ChatPage(
-                    title: data['title'],
+                    title: data['title' ],
                     imagePath: data['imagePath'],
                     receiverUserEmail: data['email'],
                     receiverUserID: data['uid']),
