@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:messenger/variables/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  final String title;
+  final IconData? icon;
+  final String text;
   final TextEditingController controller;
   final bool obscure;
 
   const CustomTextField(
       {super.key,
-      required this.title,
+      required this.text,
       required this.obscure,
-      required this.controller});
+      required this.controller,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,8 @@ class CustomTextField extends StatelessWidget {
             TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkColor),
         decoration: InputDecoration(
           border: const OutlineInputBorder(),
-          labelText: title,
+          prefixIcon: Icon(icon),
+          labelText: text,
           labelStyle: TextStyle(
               fontWeight: FontWeight.bold, color: AppColors.darkColor),
         ),

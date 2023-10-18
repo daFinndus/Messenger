@@ -88,9 +88,15 @@ class _LoginPageState extends State<LoginPage> {
       child: Column(
         children: [
           CustomTextField(
-              title: "Email", obscure: false, controller: emailController),
+              icon: Icons.email,
+              text: "Email",
+              obscure: false,
+              controller: emailController),
           CustomTextField(
-              title: "Password", obscure: true, controller: passwordController),
+              icon: Icons.password,
+              text: "Password",
+              obscure: true,
+              controller: passwordController),
           Container(
             width: 384.0,
             decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),

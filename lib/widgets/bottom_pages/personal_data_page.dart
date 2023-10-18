@@ -172,11 +172,13 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
               ),
             ),
             CustomTextField(
-                title: "First Name",
+                icon: Icons.insert_emoticon_rounded,
+                text: "First Name",
                 obscure: false,
                 controller: firstNameController),
             CustomTextField(
-                title: "Last Name",
+                icon: Icons.insert_emoticon_sharp,
+                text: "Last Name",
                 obscure: false,
                 controller: lastNameController),
             CustomDatePicker(
