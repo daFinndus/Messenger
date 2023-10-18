@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/variables/app_colors.dart';
 
 class CustomBoxButton extends StatefulWidget {
   final String title;
