@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/variables/app_colors.dart';
+import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/constants/app_names.dart';
 import 'package:messenger/widgets/top_pages/chat_list_page.dart';
 import 'package:messenger/widgets/top_pages/setting_page.dart';
 
@@ -21,7 +22,7 @@ class TabPage extends StatelessWidget {
               ],
             ),
             title: Text(
-              "Swift Messenger",
+              AppNames.appTitle,
               style: TextStyle(color: AppColors.brightColor),
             ),
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/variables/app_colors.dart';
+import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/constants/app_names.dart';
 import 'package:messenger/authenticator/auth_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'authenticator/firebase_options.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Swift Messenger",
+      title: AppNames.appTitle,
       theme: ThemeData(
         primaryColor: AppColors.primaryColor,
         scaffoldBackgroundColor: AppColors.brightColor,
