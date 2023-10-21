@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/chat_function/chat_service.dart';
-import 'package:messenger/variables/app_colors.dart';
 import 'package:messenger/widgets/components/chat_bubble.dart';
 import 'package:messenger/widgets/components/my_text_field.dart';
 import 'package:messenger/constants/app_colors.dart';
@@ -30,7 +29,7 @@ class _ChatPageState extends State<ChatPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void sendMessage() async {
-    //ony send message if there is something to send
+    //only send message if there is something to send
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
           widget.receiverUserID, _messageController.text);
@@ -48,8 +47,9 @@ class _ChatPageState extends State<ChatPage> {
               Container(
                 margin: const EdgeInsets.only(right: 8.0),
                 child: CircleAvatar(
-                    radius: 20.0,
-                    backgroundImage: AssetImage(widget.imagePath)),
+                  radius: 20.0,
+                  backgroundImage: AssetImage(widget.imagePath),
+                ),
               ),
               Text(widget.title)
             ],
@@ -82,8 +82,9 @@ class _ChatPageState extends State<ChatPage> {
           return const Text('loading');
         }
         return ListView(
-            children: snapshot.data!.docs
-                .map((document) => _buildMessageItem(document)).toList(),
+          children: snapshot.data!.docs
+              .map((document) => _buildMessageItem(document))
+              .toList(),
         );
       },
     );
@@ -99,18 +100,18 @@ class _ChatPageState extends State<ChatPage> {
         : Alignment.centerLeft;
 
     return Container(
-      alignment: alignment,
-      child: Padding(
-    padding: const EdgeInsets.all(8.0),
-      child: Column(
-          crossAxisAlignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
-              ? CrossAxisAlignment.end
-              : CrossAxisAlignment.start,
-          children: [
-        ChatBubble(message: (data['message'])),
-      ]),
-    )
-    );
+        alignment: alignment,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+              crossAxisAlignment:
+                  (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                      ? CrossAxisAlignment.end
+                      : CrossAxisAlignment.start,
+              children: [
+                ChatBubble(message: (data['message'])),
+              ]),
+        ));
   }
 
 //build message input

@@ -95,6 +95,7 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
           "firstName": firstName,
           "lastName": lastName,
           "birthday": birthday,
+          "uid": FirebaseAuth.instance.currentUser?.uid
         },
       );
     } on Exception catch (e) {
