@@ -4,7 +4,7 @@ import 'package:messenger/chat_function/message.dart';
 import 'package:flutter/material.dart';
 
 class ChatService extends ChangeNotifier {
-//get instance of auth and firestore
+// Get instance of auth and firestore
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final FirebaseFirestore _fireStore = FirebaseFirestore.instance;
 
@@ -47,6 +47,7 @@ class ChatService extends ChangeNotifier {
     // Combine the ids into a single string to use a chatroomID
     String chatRoomId = ids.join("_");
 
+    // Get the messages from the database
     return _fireStore
         .collection('chat_rooms')
         .doc(chatRoomId)
