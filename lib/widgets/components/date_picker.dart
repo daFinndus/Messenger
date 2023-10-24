@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/constants/app_colors.dart';
 import 'package:intl/intl.dart';
 
 class CustomDatePicker extends StatefulWidget {
@@ -22,10 +23,20 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
   // Function to pick a date with showDatePicker
   void pickDate() async {
     newDate = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime(1900),
-        lastDate: DateTime(2100));
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime(2100),
+      builder: (context, child) {
+        return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.fromSwatch(
+                primarySwatch: Colors.teal,
+              ),
+            ),
+            child: child!);
+      },
+    );
 
     // If user clicks on cancel, newDate will be null so return nothing
     if (newDate != null) {

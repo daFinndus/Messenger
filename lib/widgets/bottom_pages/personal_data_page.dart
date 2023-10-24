@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
-import 'package:messenger/widgets/components/datepicker.dart';
+import 'package:messenger/widgets/components/date_picker.dart';
 import 'package:messenger/widgets/tab_page.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:messenger/constants/app_colors.dart';

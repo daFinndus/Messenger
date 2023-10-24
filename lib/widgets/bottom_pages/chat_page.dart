@@ -41,45 +41,43 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Container(
-                margin: const EdgeInsets.only(right: 8.0),
-                child: CircleAvatar(
-                  radius: 20.0,
-                  backgroundImage: AssetImage(widget.imagePath),
-                ),
-              ),
-              Text(widget.title)
-            ],
-          ),
-          backgroundColor: AppColors.primaryColor,
-        ),
-        body: Column(
+      appBar: AppBar(
+        title: Row(
           children: [
-            //messages
-            Expanded(
-              child: _buildMessageList(),
+            Container(
+              margin: const EdgeInsets.only(right: 8.0),
+              child: CircleAvatar(
+                radius: 20.0,
+                backgroundImage: AssetImage(widget.imagePath),
+              ),
             ),
-
-            //user input
-            _buildMessageInput(),
+            Text(widget.title)
           ],
-        ));
+        ),
+        backgroundColor: AppColors.primaryColor,
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: _buildMessageList(),
+          ),
+          _buildMessageInput(),
+        ],
+      ),
+    );
   }
 
-  //build message list
+  // Build message list
   Widget _buildMessageList() {
     return StreamBuilder(
       stream: _chatService.getMessages(
           widget.receiverUserID, _firebaseAuth.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('Error${snapshot.error}');
+          return Text("Error${snapshot.error}");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('loading');
+          return const Text("Loading...");
         }
         return ListView(
           children: snapshot.data!.docs
@@ -90,46 +88,59 @@ class _ChatPageState extends State<ChatPage> {
     );
   }
 
-  //build message item
+  // Build message item
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    //align the messages tot the right if the sender is the current user, otherwise to the left
+    // Align the messages tot the right if the sender is the current user, otherwise to the left
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
 
     return Container(
-        alignment: alignment,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-              crossAxisAlignment:
-                  (data['senderId'] == _firebaseAuth.currentUser!.uid)
-                      ? CrossAxisAlignment.end
-                      : CrossAxisAlignment.start,
-              children: [
-                ChatBubble(message: (data['message'])),
-              ]),
-        ));
+      alignment: alignment,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment:
+              (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? CrossAxisAlignment.end
+                  : CrossAxisAlignment.start,
+          children: [
+            ChatBubble(message: (data['message'])),
+          ],
+        ),
+      ),
+    );
   }
 
-//build message input
+// Build message input
   Widget _buildMessageInput() {
     return Row(
       children: [
-        //textfield
+        // TextField
         Expanded(
+          child: Container(
+            margin: const EdgeInsets.all(8.0),
             child: MyTextField(
-          controller: _messageController,
-          hintText: 'Enter message',
-          obscureText: false,
-        )),
-
-        //send button
-        IconButton(
+              controller: _messageController,
+              hintText: 'Enter message',
+              obscureText: false,
+            ),
+          ),
+        ),
+        // Send button
+        Container(
+          margin: const EdgeInsets.only(bottom: 8.0, right: 16.0),
+          child: IconButton(
+            color: AppColors.primaryColor,
             onPressed: sendMessage,
-            icon: const Icon(Icons.arrow_upward, size: 40))
+            icon: const Icon(
+              Icons.arrow_upward,
+              size: 40,
+            ),
+          ),
+        )
       ],
     );
   }
