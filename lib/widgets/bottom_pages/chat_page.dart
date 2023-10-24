@@ -49,7 +49,9 @@ class _ChatPageState extends State<ChatPage> {
               margin: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
                 radius: 24.0,
-                backgroundImage: AssetImage(widget.imagePath),
+                backgroundImage: AssetImage(
+                  widget.imagePath,
+                ),
               ),
             ),
             Text(widget.title)

@@ -36,38 +36,17 @@ class _RegisterPageState extends State<RegisterPage> {
         // Transfer email and password and route to next page
         routeToPersonalDataPage();
       } else {
-        wrongDuplicatePasswordMessage();
+        displayErrorMessage(context, "Passwords aren't the same");
       }
     } else {
-      checkEmailAndPassword();
+      displayErrorMessage(context, "Please enter email and password");
     }
   }
 
-  // Display AlertDialog when the needed details weren't entered
-  void checkEmailAndPassword() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "Please enter email and password",
-          ),
-        );
-      },
-    );
-  }
-
-  // Display AlertDialog when the passwords aren't the same
-  void wrongDuplicatePasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "'Password' and 'Confirm Password' are not the same",
-          ),
-        );
-      },
+  // Display error message
+  void displayErrorMessage(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error)),
     );
   }
 
@@ -95,12 +74,12 @@ class _RegisterPageState extends State<RegisterPage> {
               obscure: false,
               controller: emailController),
           CustomTextField(
-              icon: Icons.password,
+              icon: Icons.security,
               text: "Password",
               obscure: true,
               controller: passwordController),
           CustomTextField(
-              icon: Icons.password_outlined,
+              icon: Icons.security,
               text: "Confirm Password",
               obscure: true,
               controller: confirmPasswordController),

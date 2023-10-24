@@ -33,52 +33,37 @@ class _LoginPageState extends State<LoginPage> {
           email: emailController.text.trim(),
           password: passwordController.text.trim());
       // Get rid of the loading circle if login is complete
-      Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
     } on FirebaseAuthException catch (e) {
       // Get rid of the loading circle if an error occurs
-      Navigator.pop(context);
+      if (context.mounted) {
+        Navigator.pop(context);
+      }
       if (e.code == "user-not-found") {
-        userNotFoundMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The entered user data wasn't found");
+        }
       } else if (e.code == "wrong-password") {
-        wrongPasswordMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The password is incorrect");
+        }
       } else if (e.code == "invalid-email") {
+        if (context.mounted) {
+          displayErrorMessage(context, "The entered email is invalid");
+        }
       } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(
-                e.code,
-                style: const TextStyle(fontSize: 12.0),
-              ),
-            );
-          },
-        );
+        if (context.mounted) {
+          displayErrorMessage(context, e.code);
+        }
       }
     }
   }
 
-  // Display AlertDialog when the user wasn't found
-  void userNotFoundMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text("No user found with email : '$emailController'"),
-        );
-      },
-    );
-  }
-
-  // Display AlertDialog when the passwords is wrong
-  void wrongPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text("Wrong password"),
-        );
-      },
+  void displayErrorMessage(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error)),
     );
   }
 
@@ -106,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
               obscure: false,
               controller: emailController),
           CustomTextField(
-              icon: Icons.password,
+              icon: Icons.security,
               text: "Password",
               obscure: true,
               controller: passwordController),

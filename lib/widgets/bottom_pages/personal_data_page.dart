@@ -59,10 +59,14 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
     );
 
     // Pop the loading circle
-    Navigator.pop(context);
+    if (context.mounted) {
+      Navigator.pop(context);
+    }
 
     // This will pop the current route
-    Navigator.of(context).pop();
+    if (context.mounted) {
+      Navigator.of(context).pop();
+    }
   }
 
   // Create user with email and password
@@ -73,11 +77,17 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
           email: widget.email, password: widget.password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
-        weakPasswordMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The password is too weak");
+        }
       } else if (e.code == "email-already-in-use") {
-        emailInUseMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The email is already in use");
+        }
       } else {
-        showErrorMessage(e.code);
+        if (context.mounted) {
+          displayErrorMessage(context, e.code);
+        }
       }
     }
   }
@@ -99,47 +109,16 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
         },
       );
     } on Exception catch (e) {
-      showErrorMessage(e.toString());
+      if (context.mounted) {
+        displayErrorMessage(context, e.toString());
+      }
     }
   }
 
-  // Display AlertDialog with a given String
-  void showErrorMessage(String text) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(text),
-        );
-      },
-    );
-  }
-
-  // Display AlertDialog when the password is too weak
-  void weakPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "Password is too weak, please use at least 6 characters",
-          ),
-        );
-      },
-    );
-  }
-
-  // Display AlertDialog when the given mail address is already in use
-  void emailInUseMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "This email is already in use",
-          ),
-        );
-      },
+  // Display error message
+  void displayErrorMessage(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error)),
     );
   }
 
