@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
+import 'package:messenger/constants/app_colors.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -85,15 +86,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.only(top: 16.0),
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
       child: Column(
         children: [
           const SizedBox(
             height: 64.0,
           ),
-          const CircleAvatar(
+          CircleAvatar(
             radius: 64.0,
-            backgroundImage: AssetImage("assets/logos/ic_launcher.png"),
+            backgroundColor: AppColors.brightColor,
+            backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
           ),
           const SizedBox(
             height: 64.0,
@@ -108,6 +110,9 @@ class _LoginPageState extends State<LoginPage> {
               text: "Password",
               obscure: true,
               controller: passwordController),
+          const SizedBox(
+            height: 80.0,
+          ),
           SizedBox(
             width: 384.0,
             child: CustomBoxButton(title: "Sign in", function: loginUser),

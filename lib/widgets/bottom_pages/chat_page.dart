@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:messenger/chat_function/chat_service.dart';
 import 'package:messenger/widgets/components/chat_bubble.dart';
-import 'package:messenger/widgets/components/my_text_field.dart';
+import 'package:messenger/widgets/components/chat_field.dart';
 import 'package:messenger/constants/app_colors.dart';
 
 class ChatPage extends StatefulWidget {
@@ -42,12 +42,13 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72.0,
         title: Row(
           children: [
             Container(
               margin: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
-                radius: 20.0,
+                radius: 24.0,
                 backgroundImage: AssetImage(widget.imagePath),
               ),
             ),
@@ -121,26 +122,24 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageInput() {
     return Row(
       children: [
-        // TextField
         Expanded(
           child: Container(
             margin: const EdgeInsets.all(8.0),
             child: MyTextField(
               controller: _messageController,
-              hintText: 'Enter message',
+              text: "Enter message...",
               obscureText: false,
             ),
           ),
         ),
-        // Send button
         Container(
           margin: const EdgeInsets.only(bottom: 8.0, right: 16.0),
           child: IconButton(
             color: AppColors.primaryColor,
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
-              size: 42.0,
+              Icons.arrow_circle_up,
+              size: 36.0,
             ),
           ),
         )

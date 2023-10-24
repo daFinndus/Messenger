@@ -27,17 +27,27 @@ class _GreetPage extends State<GreetPage> {
       backgroundColor: AppColors.primaryColor,
       body: Column(
         children: [
-          Visibility(visible: _greetState, child: const LoginPage()),
-          Visibility(visible: !_greetState, child: const RegisterPage()),
+          Visibility(
+            visible: _greetState,
+            child: const LoginPage(),
+          ),
+          Visibility(
+            visible: !_greetState,
+            child: const RegisterPage(),
+          ),
           Visibility(
             visible: _greetState,
             child: CustomTextButton(
-                title: "Not a user yet? Sign up.", function: greetStateToggle),
+              title: "Not a user yet? Sign up.",
+              function: greetStateToggle,
+            ),
           ),
           Visibility(
             visible: !_greetState,
             child: CustomTextButton(
-                title: "User already? Sign in.", function: greetStateToggle),
+              title: "User already? Sign in.",
+              function: greetStateToggle,
+            ),
           )
         ],
       ),

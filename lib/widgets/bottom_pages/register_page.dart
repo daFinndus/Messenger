@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:messenger/widgets/bottom_pages/personal_data_page.dart';
+import 'package:messenger/constants/app_colors.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -80,9 +81,10 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(
             height: 64.0,
           ),
-          const CircleAvatar(
+          CircleAvatar(
             radius: 64.0,
-            backgroundImage: AssetImage("assets/logos/ic_launcher.png"),
+            backgroundColor: AppColors.brightColor,
+            backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
           ),
           const SizedBox(
             height: 64.0,

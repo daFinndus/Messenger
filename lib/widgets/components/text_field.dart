@@ -17,7 +17,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.brightColor,
       margin: const EdgeInsets.all(8.0),
       child: TextField(
         controller: controller,
@@ -27,14 +26,18 @@ class CustomTextField extends StatelessWidget {
           color: AppColors.primaryColor,
         ),
         decoration: InputDecoration(
+          hintText: text,
+          hintStyle: TextStyle(
+            color: AppColors.secondaryColor,
+          ),
+          filled: true,
+          fillColor: AppColors.brightColor,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(16.0),
+          ),
           prefixIcon: Icon(
             icon,
             color: AppColors.primaryColor,
-          ),
-          labelText: text,
-          labelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.secondaryColor,
           ),
         ),
       ),
