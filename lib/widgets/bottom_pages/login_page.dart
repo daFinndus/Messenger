@@ -84,9 +84,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.only(top: 16.0),
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
+          const SizedBox(
+            height: 64.0,
+          ),
+          const CircleAvatar(
+            radius: 64.0,
+            backgroundImage: AssetImage("assets/logos/ic_launcher.png"),
+          ),
+          const SizedBox(
+            height: 64.0,
+          ),
           CustomTextField(
               icon: Icons.email,
               text: "Email",
@@ -97,9 +108,8 @@ class _LoginPageState extends State<LoginPage> {
               text: "Password",
               obscure: true,
               controller: passwordController),
-          Container(
+          SizedBox(
             width: 384.0,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
             child: CustomBoxButton(title: "Sign in", function: loginUser),
           ),
         ],

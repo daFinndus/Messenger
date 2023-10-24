@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/constants/app_colors.dart';
 
 class MyTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -14,16 +15,19 @@ class MyTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-        controller: controller,
-        obscureText: obscureText,
-        decoration: InputDecoration(
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.teal),
-          ),
-          fillColor: Colors.teal,
-          filled: true,
-          hintText: hintText,
-          hintStyle: const TextStyle(color: Colors.white),
-        ));
+      style: TextStyle(color: AppColors.brightColor),
+      controller: controller,
+      obscureText: obscureText,
+      decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16.0),
+          borderSide: BorderSide(color: AppColors.primaryColor, width: 1.0),
+        ),
+        fillColor: AppColors.primaryColor,
+        filled: true,
+        hintText: hintText,
+        hintStyle: const TextStyle(color: Colors.white),
+      ),
+    );
   }
 }

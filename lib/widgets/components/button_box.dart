@@ -16,16 +16,12 @@ class _CustomBoxButtonState extends State<CustomBoxButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 384.0,
+      height: 54.0,
       margin: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(4)),
       child: ElevatedButton(
         onPressed: () => widget.function(),
         style: TextButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          backgroundColor: AppColors.primaryColor,
+          backgroundColor: AppColors.brightColor,
           padding: const EdgeInsets.all(8),
         ),
         child: Text(
@@ -33,7 +29,7 @@ class _CustomBoxButtonState extends State<CustomBoxButton> {
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
-            color: AppColors.brightColor,
+            color: AppColors.primaryColor,
           ),
         ),
       ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/widgets/components/button_text.dart';
 import 'package:messenger/widgets/bottom_pages/login_page.dart';
 import 'package:messenger/widgets/bottom_pages/register_page.dart';
+import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/constants/app_names.dart';
 
 class GreetPage extends StatefulWidget {
   const GreetPage({super.key});
@@ -23,13 +24,7 @@ class _GreetPage extends State<GreetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          "Swift Messenger",
-          style: TextStyle(color: AppColors.brightColor),
-        ),
-      ),
+      backgroundColor: AppColors.primaryColor,
       body: Column(
         children: [
           Visibility(visible: _greetState, child: const LoginPage()),

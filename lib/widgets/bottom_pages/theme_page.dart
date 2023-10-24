@@ -14,6 +14,9 @@ class ThemePage extends StatelessWidget {
           style: TextStyle(color: AppColors.brightColor),
         ),
       ),
+      body: Column(
+        children: [],
+      ),
     );
   }
 }
