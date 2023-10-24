@@ -24,7 +24,7 @@ class _CustomTextButtonState extends State<CustomTextButton> {
           style: TextStyle(
             fontSize: 20.0,
             fontWeight: FontWeight.bold,
-            color: AppColors.darkColor,
+            color: AppColors.brightColor,
           ),
         ),
       ),

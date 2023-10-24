@@ -17,18 +17,25 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: AppColors.brightColor,
       margin: const EdgeInsets.all(8.0),
       child: TextField(
         controller: controller,
         obscureText: obscure,
-        style:
-            TextStyle(fontWeight: FontWeight.bold, color: AppColors.darkColor),
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: AppColors.primaryColor,
+        ),
         decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          prefixIcon: Icon(icon),
+          prefixIcon: Icon(
+            icon,
+            color: AppColors.primaryColor,
+          ),
           labelText: text,
           labelStyle: TextStyle(
-              fontWeight: FontWeight.bold, color: AppColors.darkColor),
+            fontWeight: FontWeight.bold,
+            color: AppColors.secondaryColor,
+          ),
         ),
       ),
     );

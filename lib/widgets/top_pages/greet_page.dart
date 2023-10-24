@@ -24,13 +24,7 @@ class _GreetPage extends State<GreetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.primaryColor,
-        title: Text(
-          AppNames.appTitle,
-          style: TextStyle(color: AppColors.brightColor),
-        ),
-      ),
+      backgroundColor: AppColors.primaryColor,
       body: Column(
         children: [
           Visibility(visible: _greetState, child: const LoginPage()),

@@ -29,11 +29,11 @@ class _ChatPageState extends State<ChatPage> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void sendMessage() async {
-    //only send message if there is something to send
+    // Only send message if there is something to send
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
           widget.receiverUserID, _messageController.text);
-      //clear the text controller after sending the message
+      // Clear the text controller after sending the message
       _messageController.clear();
     }
   }
@@ -58,6 +58,9 @@ class _ChatPageState extends State<ChatPage> {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 8.0,
+          ),
           Expanded(
             child: _buildMessageList(),
           ),
@@ -137,7 +140,7 @@ class _ChatPageState extends State<ChatPage> {
             onPressed: sendMessage,
             icon: const Icon(
               Icons.arrow_upward,
-              size: 40,
+              size: 42.0,
             ),
           ),
         )

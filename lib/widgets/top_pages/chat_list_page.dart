@@ -18,6 +18,14 @@ class _ChatListState extends State<ChatList> {
         ChatBoxDemo(title: "Leon", imagePath: "assets/images/leon.png"),
         ChatBoxDemo(title: "Raj", imagePath: "assets/images/rajesh.png"),
         ChatBoxDemo(title: "Tom", imagePath: "assets/images/thomas.png"),
+        ChatBoxDemo(title: "Felix", imagePath: "assets/images/mary.png"),
+        ChatBoxDemo(title: "James", imagePath: "assets/images/leon.png"),
+        ChatBoxDemo(title: "Peter", imagePath: "assets/images/rajesh.png"),
+        ChatBoxDemo(title: "Dieter", imagePath: "assets/images/thomas.png"),
+        ChatBoxDemo(title: "Darren", imagePath: "assets/images/mary.png"),
+        ChatBoxDemo(title: "Finn", imagePath: "assets/images/leon.png"),
+        ChatBoxDemo(title: "Jonas", imagePath: "assets/images/rajesh.png"),
+        ChatBoxDemo(title: "Simon", imagePath: "assets/images/thomas.png"),
       ],
     );
   }
