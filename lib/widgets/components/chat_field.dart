@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants/app_colors.dart';
 
-class MyTextField extends StatelessWidget {
+class ChatField extends StatelessWidget {
   final TextEditingController controller;
   final String text;
   final bool obscureText;
 
-  const MyTextField(
+  const ChatField(
       {super.key,
       required this.controller,
       required this.text,

@@ -127,7 +127,7 @@ class _ChatPageState extends State<ChatPage> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.all(8.0),
-            child: MyTextField(
+            child: ChatField(
               controller: _messageController,
               text: "Enter message...",
               obscureText: false,

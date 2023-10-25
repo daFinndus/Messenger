@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/constants/app_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
@@ -83,6 +84,23 @@ class _LoginPageState extends State<LoginPage> {
             backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
           ),
           const SizedBox(
+            height: 32.0,
+          ),
+          Text(
+            AppNames.appTitle,
+            style: TextStyle(
+              fontSize: 26.0,
+              color: AppColors.brightColor,
+            ),
+          ),
+          Text(
+            AppNames.appWelcome,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: AppColors.brightColor,
+            ),
+          ),
+          const SizedBox(
             height: 64.0,
           ),
           CustomTextField(
@@ -91,7 +109,7 @@ class _LoginPageState extends State<LoginPage> {
               obscure: false,
               controller: emailController),
           CustomTextField(
-              icon: Icons.security,
+              icon: Icons.lock,
               text: "Password",
               obscure: true,
               controller: passwordController),
