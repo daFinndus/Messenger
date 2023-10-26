@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/date_picker.dart';
-import 'package:messenger/widgets/tab_page.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/constants/app_names.dart';
@@ -122,23 +121,18 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
     );
   }
 
-  // Route to personal_data_page.dart
-  void routeToTabPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const TabPage(),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
           AppNames.appTitle,
           style: TextStyle(color: AppColors.brightColor),
+        ),
+        iconTheme: IconThemeData(
+          color: AppColors.brightColor,
         ),
       ),
       body: Container(
@@ -147,9 +141,12 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
           children: [
             Container(
               margin: const EdgeInsets.all(8.0),
-              child: const Text(
+              child: Text(
                 "Please enter the following details",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.brightColor),
               ),
             ),
             CustomTextField(

@@ -84,12 +84,13 @@ class _LoginPageState extends State<LoginPage> {
             backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
           ),
           const SizedBox(
-            height: 32.0,
+            height: 16.0,
           ),
           Text(
             AppNames.appTitle,
             style: TextStyle(
               fontSize: 26.0,
+              fontWeight: FontWeight.bold,
               color: AppColors.brightColor,
             ),
           ),

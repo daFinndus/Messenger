@@ -24,32 +24,41 @@ class _GreetPage extends State<GreetPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.primaryColor,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Visibility(
-              visible: _greetState,
-              child: const LoginPage(),
-            ),
-            Visibility(
-              visible: !_greetState,
-              child: const RegisterPage(),
-            ),
-            Visibility(
-              visible: _greetState,
-              child: CustomTextButton(
-                title: "Not a user yet? Sign up.",
-                function: greetStateToggle,
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            opacity: 0.3,
+            image: AssetImage("assets/images/background.png"),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Visibility(
+                visible: _greetState,
+                child: const LoginPage(),
               ),
-            ),
-            Visibility(
-              visible: !_greetState,
-              child: CustomTextButton(
-                title: "User already? Sign in.",
-                function: greetStateToggle,
+              Visibility(
+                visible: !_greetState,
+                child: const RegisterPage(),
               ),
-            )
-          ],
+              Visibility(
+                visible: _greetState,
+                child: CustomTextButton(
+                  title: "Not a user yet? Sign up.",
+                  function: greetStateToggle,
+                ),
+              ),
+              Visibility(
+                visible: !_greetState,
+                child: CustomTextButton(
+                  title: "User already? Sign in.",
+                  function: greetStateToggle,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
