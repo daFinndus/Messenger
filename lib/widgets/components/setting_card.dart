@@ -3,13 +3,13 @@ import 'package:messenger/constants/app_colors.dart';
 
 class CustomSettingCard extends StatefulWidget {
   final String title; // Title of the setting card
-  final String imagePath; // Image path of the setting card
+  final String imageURL; // Image path of the setting card
   final Function function; // Function for the setting card
 
   const CustomSettingCard(
       {super.key,
       required this.title,
-      required this.imagePath,
+      required this.imageURL,
       required this.function});
 
   @override
@@ -30,7 +30,10 @@ class _CustomSettingCardState extends State<CustomSettingCard> {
           Container(
             margin: const EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
-                radius: 28, backgroundImage: AssetImage(widget.imagePath)),
+              radius: 30.0,
+              backgroundImage: NetworkImage(widget.imageURL),
+              backgroundColor: Colors.transparent,
+            ),
           ),
           Text(
             widget.title,

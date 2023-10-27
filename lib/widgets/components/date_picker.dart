@@ -64,6 +64,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       padding: const EdgeInsets.all(4.0),
       child: Center(
         child: TextField(
+          style: TextStyle(color: AppColors.brightColor),
           controller: dateController,
           decoration: InputDecoration(
             icon: Icon(

@@ -1,3 +1,4 @@
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -7,7 +8,6 @@ import 'package:messenger/widgets/bottom_pages/change_password_page.dart';
 import 'package:messenger/widgets/bottom_pages/edit_profile_page.dart';
 import 'package:messenger/widgets/bottom_pages/imprint_page.dart';
 import 'package:messenger/widgets/bottom_pages/theme_page.dart';
-import 'package:messenger/constants/app_names.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -17,12 +17,29 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingPage> {
-  String firstName = AppNames.userName;
-
   @override
   void initState() {
     super.initState();
-    fetchFirstName();
+    fetchUserData();
+  }
+
+  // Function to fetch the first name of the user
+  Future<List<String>> fetchUserData() async {
+    try {
+      var documentSnapshot = await FirebaseFirestore.instance
+          .collection("users")
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .get();
+      if (documentSnapshot.exists) {
+        String firstName = documentSnapshot.get("firstName");
+        String imageURL = documentSnapshot.get("imageURL");
+        return [firstName, imageURL];
+      } else {
+        return ["", ""];
+      }
+    } catch (e) {
+      return ["", ""];
+    }
   }
 
   // Function to route to another page
@@ -34,40 +51,23 @@ class _SettingsPageState extends State<SettingPage> {
     );
   }
 
-  // Function to fetch the first name of the user
-  Future<String> fetchFirstName() async {
-    try {
-      var documentSnapshot = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      if (documentSnapshot.exists) {
-        var value = documentSnapshot.get("firstName");
-        return value;
-      } else {
-        return "No Entry registered in database";
-      }
-    } catch (error) {
-      return "Error while fetching name";
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<String>(
-      future: fetchFirstName(),
-      builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+    return FutureBuilder<List>(
+      future: fetchUserData(),
+      builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
-          String firstName = snapshot.data!;
+          String firstName = snapshot.data![0];
+          String imageURL = snapshot.data![1];
           return ListView(
             children: [
               CustomSettingCard(
                 title: firstName,
-                imagePath: "assets/images/darren.jpg",
+                imageURL: imageURL,
                 function: () => routeToPage(const EditProfilePage()),
               ),
               CustomSettingBox(
