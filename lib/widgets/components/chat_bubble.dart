@@ -4,8 +4,9 @@ import 'package:messenger/constants/app_colors.dart';
 
 class ChatBubble extends StatelessWidget {
   final String message;
+  final Color color;
 
-  const ChatBubble({super.key, required this.message});
+  const ChatBubble({super.key, required this.message, required this.color});
 
   @override
   Widget build(BuildContext context) {

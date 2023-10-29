@@ -49,7 +49,7 @@ class _ChatPageState extends State<ChatPage> {
               margin: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
                 radius: 24.0,
-                backgroundImage: AssetImage(
+                backgroundImage: NetworkImage(
                   widget.imagePath,
                 ),
               ),
@@ -80,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
           widget.receiverUserID, _firebaseAuth.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text("Error${snapshot.error}");
+          return Text("Error: ${snapshot.error}");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Loading...");
@@ -98,13 +98,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    // Align the messages tot the right if the sender is the current user, otherwise to the left
-    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
-
     return Container(
-      alignment: alignment,
+      alignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -113,7 +110,12 @@ class _ChatPageState extends State<ChatPage> {
                   ? CrossAxisAlignment.end
                   : CrossAxisAlignment.start,
           children: [
-            ChatBubble(message: (data['message'])),
+            ChatBubble(
+              message: (data['message']),
+              color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? AppColors.primaryColor
+                  : AppColors.secondaryColor,
+            ),
           ],
         ),
       ),
