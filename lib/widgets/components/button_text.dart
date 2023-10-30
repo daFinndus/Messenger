@@ -16,13 +16,13 @@ class _CustomTextButtonState extends State<CustomTextButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(8.0),
+      margin: const EdgeInsets.all(4.0),
       child: TextButton(
         onPressed: () => widget.function(),
         child: Text(
           widget.title,
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
             color: AppColors.brightColor,
           ),

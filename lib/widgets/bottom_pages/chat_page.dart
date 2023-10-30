@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:messenger/chat_function/chat_service.dart';
+import 'package:messenger/services/chat_function/chat_service.dart';
 import 'package:messenger/widgets/components/chat_bubble.dart';
-import 'package:messenger/widgets/components/my_text_field.dart';
+import 'package:messenger/widgets/components/chat_field.dart';
 import 'package:messenger/constants/app_colors.dart';
 
 class ChatPage extends StatefulWidget {
@@ -42,13 +42,16 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72.0,
         title: Row(
           children: [
             Container(
               margin: const EdgeInsets.only(right: 8.0),
               child: CircleAvatar(
-                radius: 20.0,
-                backgroundImage: AssetImage(widget.imagePath),
+                radius: 24.0,
+                backgroundImage: NetworkImage(
+                  widget.imagePath,
+                ),
               ),
             ),
             Text(widget.title)
@@ -77,7 +80,7 @@ class _ChatPageState extends State<ChatPage> {
           widget.receiverUserID, _firebaseAuth.currentUser!.uid),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text("Error${snapshot.error}");
+          return Text("Error: ${snapshot.error}");
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Loading...");
@@ -95,13 +98,10 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageItem(DocumentSnapshot document) {
     Map<String, dynamic> data = document.data() as Map<String, dynamic>;
 
-    // Align the messages tot the right if the sender is the current user, otherwise to the left
-    var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
-        ? Alignment.centerRight
-        : Alignment.centerLeft;
-
     return Container(
-      alignment: alignment,
+      alignment: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+          ? Alignment.centerRight
+          : Alignment.centerLeft,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -110,7 +110,12 @@ class _ChatPageState extends State<ChatPage> {
                   ? CrossAxisAlignment.end
                   : CrossAxisAlignment.start,
           children: [
-            ChatBubble(message: (data['message'])),
+            ChatBubble(
+              message: (data['message']),
+              color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
+                  ? AppColors.primaryColor
+                  : AppColors.secondaryColor,
+            ),
           ],
         ),
       ),
@@ -121,26 +126,24 @@ class _ChatPageState extends State<ChatPage> {
   Widget _buildMessageInput() {
     return Row(
       children: [
-        // TextField
         Expanded(
           child: Container(
             margin: const EdgeInsets.all(8.0),
-            child: MyTextField(
+            child: ChatField(
               controller: _messageController,
-              hintText: 'Enter message',
+              text: "Enter message...",
               obscureText: false,
             ),
           ),
         ),
-        // Send button
         Container(
           margin: const EdgeInsets.only(bottom: 8.0, right: 16.0),
           child: IconButton(
             color: AppColors.primaryColor,
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
-              size: 42.0,
+              Icons.arrow_circle_up,
+              size: 36.0,
             ),
           ),
         )

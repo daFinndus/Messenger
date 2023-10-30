@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:messenger/chat_function/message.dart';
+import 'package:messenger/services/chat_function/message.dart';
 import 'package:flutter/material.dart';
 
 class ChatService extends ChangeNotifier {
@@ -13,8 +13,10 @@ class ChatService extends ChangeNotifier {
     // Get current user info
     final String currentUserId = _firebaseAuth.currentUser!.uid;
     final String currentUserEmail = _firebaseAuth.currentUser!.email.toString();
+
     // Make a timestamp
     final Timestamp timestamp = Timestamp.now();
+
     // Create a new message with certain details
     Message newMessage = Message(
       senderId: currentUserId,
@@ -26,8 +28,10 @@ class ChatService extends ChangeNotifier {
 
     // Construct chat room id from current user id and receiver id
     List<String> ids = [currentUserId, receiverId];
+
     // Sort the ids (this ensures the chat room id is always the same for any pair of people
     ids.sort();
+
     // Combine the ids into a single string to use a chatroomID
     String chatRoomId = ids.join("_");
 
@@ -44,7 +48,8 @@ class ChatService extends ChangeNotifier {
     // Construct chat room id from user ids
     List<String> ids = [userId, otherUserId];
     ids.sort();
-    // Combine the ids into a single string to use a chatroomID
+
+    // Combine the ids into a single string to use a chatroomId
     String chatRoomId = ids.join("_");
 
     // Get the messages from the database

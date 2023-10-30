@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:messenger/constants/app_colors.dart';
 import 'package:intl/intl.dart';
+import 'package:messenger/constants/app_colors.dart';
 
 class CustomDatePicker extends StatefulWidget {
   final String text;
@@ -64,10 +64,15 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
       padding: const EdgeInsets.all(4.0),
       child: Center(
         child: TextField(
+          style: TextStyle(color: AppColors.brightColor),
           controller: dateController,
           decoration: InputDecoration(
-            icon: const Icon(Icons.calendar_today),
+            icon: Icon(
+              Icons.calendar_today,
+              color: AppColors.brightColor,
+            ),
             labelText: widget.text,
+            labelStyle: TextStyle(color: AppColors.brightColor),
           ),
           readOnly: true,
           onTap: pickDate,

@@ -20,14 +20,20 @@ class _CustomBoxButtonState extends State<CustomBoxButton> {
       margin: const EdgeInsets.all(8.0),
       child: ElevatedButton(
         onPressed: () => widget.function(),
-        style: TextButton.styleFrom(
-          backgroundColor: AppColors.brightColor,
-          padding: const EdgeInsets.all(8),
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all<Color>(
+            AppColors.brightColor,
+          ),
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+          ),
         ),
         child: Text(
           widget.title,
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 16.0,
             fontWeight: FontWeight.bold,
             color: AppColors.primaryColor,
           ),

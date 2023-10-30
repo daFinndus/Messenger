@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/constants/app_names.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/text_field.dart';
 import 'package:messenger/widgets/bottom_pages/personal_data_page.dart';
+import 'package:messenger/constants/app_colors.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,58 +17,34 @@ class _RegisterPageState extends State<RegisterPage> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  // Route to personal_data_page.dart
-  void routeToPersonalDataPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => PersonalDataPage(
-          email: emailController.text,
-          password: passwordController.text,
-        ),
-      ),
-    );
-  }
-
   void goToNextPage() {
     // Check if email and password was entered
-    if (emailController.text != "" && passwordController.text != "") {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
       // Check if password and confirm password are the same
       if (passwordController.text == confirmPasswordController.text) {
         // Transfer email and password and route to next page
-        routeToPersonalDataPage();
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => PersonalDataPage(
+              email: emailController.text,
+              password: passwordController.text,
+            ),
+          ),
+        );
       } else {
-        wrongDuplicatePasswordMessage();
+        // Display error message
+        displayErrorMessage(context, "Passwords aren't the same");
       }
     } else {
-      checkEmailAndPassword();
+      // Display error message
+      displayErrorMessage(context, "Please enter email and password");
     }
   }
 
-  // Display AlertDialog when the needed details weren't entered
-  void checkEmailAndPassword() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "Please enter email and password",
-          ),
-        );
-      },
-    );
-  }
-
-  // Display AlertDialog when the passwords aren't the same
-  void wrongDuplicatePasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "'Password' and 'Confirm Password' are not the same",
-          ),
-        );
-      },
+  // Display error message
+  void displayErrorMessage(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error)),
     );
   }
 
@@ -80,9 +58,28 @@ class _RegisterPageState extends State<RegisterPage> {
           const SizedBox(
             height: 64.0,
           ),
-          const CircleAvatar(
+          CircleAvatar(
             radius: 64.0,
-            backgroundImage: AssetImage("assets/logos/ic_launcher.png"),
+            backgroundColor: AppColors.brightColor,
+            backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
+          ),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Text(
+            AppNames.appTitle,
+            style: TextStyle(
+              fontSize: 26.0,
+              fontWeight: FontWeight.bold,
+              color: AppColors.brightColor,
+            ),
+          ),
+          Text(
+            AppNames.appSubtitle,
+            style: TextStyle(
+              fontSize: 20.0,
+              color: AppColors.brightColor,
+            ),
           ),
           const SizedBox(
             height: 64.0,
@@ -93,12 +90,12 @@ class _RegisterPageState extends State<RegisterPage> {
               obscure: false,
               controller: emailController),
           CustomTextField(
-              icon: Icons.password,
+              icon: Icons.lock,
               text: "Password",
               obscure: true,
               controller: passwordController),
           CustomTextField(
-              icon: Icons.password_outlined,
+              icon: Icons.lock,
               text: "Confirm Password",
               obscure: true,
               controller: confirmPasswordController),

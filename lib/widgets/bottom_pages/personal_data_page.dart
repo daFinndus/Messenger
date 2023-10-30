@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:messenger/widgets/components/button_box.dart';
 import 'package:messenger/widgets/components/date_picker.dart';
-import 'package:messenger/widgets/tab_page.dart';
-import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/widgets/components/text_field.dart';
+import 'package:messenger/constants/app_colors.dart';
+import 'package:messenger/constants/app_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:image_picker/image_picker.dart';
 
 class PersonalDataPage extends StatefulWidget {
   final String email;
@@ -25,6 +29,10 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
 
+  XFile? image; // Store the image
+  String imageName = ""; // Store the name of the image
+  bool imageExistent = false; // Check if the user has a profile picture
+
   // DateTime variable to store the selectedDate
   DateTime? selectedDate;
 
@@ -37,31 +45,51 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
 
   // Function to add personal user details and register the user
   void setupUser(String firstName, String lastName) async {
-    // Widget to display the process -> instant feedback
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const Center(
-          child: CircularProgressIndicator(),
+    if (firstName.isNotEmpty && lastName.isNotEmpty) {
+      // Check if the image was taken
+      if (image != null) {
+        // Widget to display the process -> instant feedback
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          },
         );
-      },
-    );
 
-    // Create the user
-    await registerUser();
+        // Create the user
+        await registerUser();
 
-    // Store user details
-    await addUserDetails(
-      firstNameController.text,
-      lastNameController.text,
-      selectedDate,
-    );
+        String imageURL = await uploadImage();
 
-    // Pop the loading circle
-    Navigator.pop(context);
+        // Store user details
+        await addUserDetails(
+          firstNameController.text,
+          lastNameController.text,
+          imageURL,
+          selectedDate,
+        );
 
-    // This will pop the current route
-    Navigator.of(context).pop();
+        // Pop the loading circle
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
+
+        // This will pop the current route
+        if (context.mounted) {
+          Navigator.of(context).pop();
+        }
+      } else {
+        if (context.mounted) {
+          displayErrorMessage(context, "Please select a profile picture");
+        }
+      }
+    } else {
+      if (context.mounted) {
+        displayErrorMessage(context, "Please fill in all the fields");
+      }
+    }
   }
 
   // Create user with email and password
@@ -72,18 +100,24 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
           email: widget.email, password: widget.password);
     } on FirebaseAuthException catch (e) {
       if (e.code == "weak-password") {
-        weakPasswordMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The password is too weak");
+        }
       } else if (e.code == "email-already-in-use") {
-        emailInUseMessage();
+        if (context.mounted) {
+          displayErrorMessage(context, "The email is already in use");
+        }
       } else {
-        showErrorMessage(e.code);
+        if (context.mounted) {
+          displayErrorMessage(context, e.code);
+        }
       }
     }
   }
 
   // Function to add the personal user details
-  Future addUserDetails(
-      String firstName, String lastName, DateTime? birthday) async {
+  Future addUserDetails(String firstName, String lastName, String imageURL,
+      DateTime? birthday) async {
     try {
       await FirebaseFirestore.instance
           .collection("users")
@@ -92,108 +126,173 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
         {
           "email": widget.email,
           "firstName": firstName,
+          "imageURL": imageURL,
           "lastName": lastName,
           "birthday": birthday,
           "uid": FirebaseAuth.instance.currentUser?.uid
         },
       );
     } on Exception catch (e) {
-      showErrorMessage(e.toString());
+      if (context.mounted) {
+        displayErrorMessage(context, e.toString());
+      }
     }
   }
 
-  // Display AlertDialog with a given String
-  void showErrorMessage(String text) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: Text(text),
-        );
-      },
-    );
+  // Function to pick an image with the camera or gallery
+  void pickImage(ImageSource source) async {
+    ImagePicker picker = ImagePicker();
+    XFile? picture = await picker.pickImage(source: source);
+
+    // Exit the function if no picture was taken
+    if (picture == null) return;
+
+    // Transfer the picture to our image variable
+    image = picture;
+    // Choosing a unique file name
+    imageName = DateTime.now().millisecondsSinceEpoch.toString();
+
+    // Update our boolean and the picture
+    setState(() {
+      imageExistent = true;
+    });
   }
 
-  // Display AlertDialog when the password is too weak
-  void weakPasswordMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "Password is too weak, please use at least 6 characters",
-          ),
-        );
-      },
-    );
+  Future<String> uploadImage() async {
+    // Create a reference of our firebase storage
+    Reference storageReference = FirebaseStorage.instance
+        .ref()
+        .child("profile_pictures/${FirebaseAuth.instance.currentUser?.uid}");
+
+    // Create a reference of the file we want to upload
+    Reference imageReference = storageReference.child(imageName);
+
+    // Handle errors
+    try {
+      // Store the file in firebase storage
+      await imageReference.putData(
+        await image!.readAsBytes(),
+        SettableMetadata(contentType: 'image/jpeg'),
+      );
+      // Store the download url in the database
+      String imageURL = await imageReference.getDownloadURL();
+      return imageURL;
+    } catch (e) {
+      if (context.mounted) {
+        displayErrorMessage(context, e.toString());
+      }
+    }
+    // In case of an error return an empty string
+    return "";
   }
 
-  // Display AlertDialog when the given mail address is already in use
-  void emailInUseMessage() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return const AlertDialog(
-          title: Text(
-            "This email is already in use",
-          ),
-        );
-      },
-    );
-  }
-
-  // Route to personal_data_page.dart
-  void routeToTabPage() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => const TabPage(),
-      ),
+  // Display error message
+  void displayErrorMessage(BuildContext context, String error) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(error)),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryColor,
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor,
         title: Text(
-          "Swift Messenger",
+          AppNames.appTitle,
           style: TextStyle(color: AppColors.brightColor),
         ),
+        iconTheme: IconThemeData(
+          color: AppColors.brightColor,
+        ),
       ),
-      body: Container(
-        padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.all(8.0),
-              child: const Text(
-                "Please enter the following details",
-                style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+          child: Column(
+            children: [
+              Container(
+                margin: const EdgeInsets.all(8.0),
+                child: Text(
+                  "Please enter the following details",
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.brightColor,
+                  ),
+                ),
               ),
-            ),
-            CustomTextField(
-                icon: Icons.insert_emoticon_rounded,
-                text: "First Name",
-                obscure: false,
-                controller: firstNameController),
-            CustomTextField(
-                icon: Icons.insert_emoticon_sharp,
-                text: "Last Name",
-                obscure: false,
-                controller: lastNameController),
-            CustomDatePicker(
-              text: "Please enter your birthday",
-              onDateSelected: handleDateSelected, // Pass the callback function
-            ),
-            CustomBoxButton(
-              title: "Sign up",
-              function: () => setupUser(
-                firstNameController.text,
-                lastNameController.text,
+              const SizedBox(
+                height: 24.0,
               ),
-            )
-          ],
+              Container(
+                width: 128.0,
+                height: 128.0,
+                decoration: BoxDecoration(
+                  color: AppColors.brightColor,
+                  borderRadius: BorderRadius.circular(32.0),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(32.0),
+                  child: imageExistent
+                      ? Image.file(
+                          File(image!.path),
+                          fit: BoxFit.cover,
+                        )
+                      : Icon(
+                          Icons.person_rounded,
+                          size: 96.0,
+                          color: AppColors.primaryColor,
+                        ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                    onPressed: () => pickImage(ImageSource.camera),
+                    icon: Icon(
+                      Icons.camera_alt_rounded,
+                      color: AppColors.brightColor,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => pickImage(ImageSource.gallery),
+                    icon: Icon(
+                      Icons.folder_rounded,
+                      color: AppColors.brightColor,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 8.0,
+              ),
+              CustomTextField(
+                  icon: Icons.insert_emoticon_rounded,
+                  text: "First Name",
+                  obscure: false,
+                  controller: firstNameController),
+              CustomTextField(
+                  icon: Icons.insert_emoticon_sharp,
+                  text: "Last Name",
+                  obscure: false,
+                  controller: lastNameController),
+              CustomDatePicker(
+                text: "Please enter your birthday",
+                onDateSelected:
+                    handleDateSelected, // Pass the callback function
+              ),
+              CustomBoxButton(
+                title: "Sign up",
+                function: () => setupUser(
+                  firstNameController.text,
+                  lastNameController.text,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
