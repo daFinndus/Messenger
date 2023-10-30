@@ -8,14 +8,14 @@ import 'package:messenger/constants/app_colors.dart';
 
 class ChatPage extends StatefulWidget {
   final String title;
-  final String imagePath;
+  final String imageURL;
   final String receiverUserEmail;
   final String receiverUserID;
 
   const ChatPage(
       {super.key,
       required this.title,
-      required this.imagePath,
+      required this.imageURL,
       required this.receiverUserEmail,
       required this.receiverUserID});
 
@@ -50,7 +50,7 @@ class _ChatPageState extends State<ChatPage> {
               child: CircleAvatar(
                 radius: 24.0,
                 backgroundImage: NetworkImage(
-                  widget.imagePath,
+                  widget.imageURL,
                 ),
               ),
             ),
@@ -112,9 +112,10 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             ChatBubble(
               message: (data['message']),
+              timestamp: data['timestamp'].toDate().toString().substring(0, 19),
               color: (data['senderId'] == _firebaseAuth.currentUser!.uid)
                   ? AppColors.primaryColor
-                  : AppColors.secondaryColor,
+                  : AppColors.contrastColor,
             ),
           ],
         ),
@@ -127,13 +128,10 @@ class _ChatPageState extends State<ChatPage> {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            margin: const EdgeInsets.all(8.0),
-            child: ChatField(
-              controller: _messageController,
-              text: "Enter message...",
-              obscureText: false,
-            ),
+          child: ChatField(
+            controller: _messageController,
+            text: "Enter message...",
+            obscureText: false,
           ),
         ),
         Container(
