@@ -15,9 +15,11 @@ class _GreetPage extends State<GreetPage> {
   bool _greetState = false;
 
   void greetStateToggle() {
-    setState(() {
-      _greetState = !_greetState;
-    });
+    setState(
+      () {
+        _greetState = !_greetState;
+      },
+    );
   }
 
   @override
