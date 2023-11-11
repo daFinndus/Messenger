@@ -34,10 +34,10 @@ class _SettingsPageState extends State<SettingPage> {
         String imageURL = documentSnapshot.get("imageURL");
         return [firstName, imageURL];
       } else {
-        return ["Admin", "https://t.ly/8prUf"];
+        return ['Admin', 'https://t.ly/8prUf'];
       }
     } catch (e) {
-      return ["Admin", "https://t.ly/8prUf"];
+      return ['Admin', 'https://t.ly/8prUf'];
     }
   }
 
@@ -58,7 +58,7 @@ class _SettingsPageState extends State<SettingPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text("Error: ${snapshot.error}"));
+          return Center(child: Text('Error: ${snapshot.error}'));
         } else {
           String firstName = snapshot.data![0];
           String imageURL = snapshot.data![1];
@@ -70,19 +70,19 @@ class _SettingsPageState extends State<SettingPage> {
                 function: () => routeToPage(const EditProfilePage()),
               ),
               CustomSettingBox(
-                title: "Themes",
+                title: 'Themes',
                 function: () => routeToPage(const ThemePage()),
               ),
               CustomSettingBox(
-                title: "Change Password",
+                title: 'Change Password',
                 function: () => routeToPage(const ChangePasswordPage()),
               ),
               CustomSettingBox(
-                title: "Imprint",
+                title: 'Imprint',
                 function: () => routeToPage(const ImprintPage()),
               ),
               CustomSettingBox(
-                title: "Sign Out",
+                title: 'Sign Out',
                 function: FirebaseAuth.instance.signOut,
               ),
             ],

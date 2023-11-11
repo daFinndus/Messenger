@@ -33,11 +33,11 @@ class _RegisterPageState extends State<RegisterPage> {
         );
       } else {
         // Display error message
-        displayErrorMessage(context, "Passwords aren't the same");
+        displayErrorMessage(context, 'Passwords are not the same');
       }
     } else {
       // Display error message
-      displayErrorMessage(context, "Please enter email and password");
+      displayErrorMessage(context, 'Please enter email and password');
     }
   }
 
@@ -61,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
           CircleAvatar(
             radius: 64.0,
             backgroundColor: AppColors.brightColor,
-            backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
+            backgroundImage: const AssetImage('assets/logos/ic_launcher.png'),
           ),
           const SizedBox(
             height: 16.0,
@@ -86,23 +86,23 @@ class _RegisterPageState extends State<RegisterPage> {
           ),
           CustomTextField(
               icon: Icons.email,
-              text: "Email",
+              text: 'Email',
               obscure: false,
               controller: emailController),
           CustomTextField(
               icon: Icons.lock,
-              text: "Password",
+              text: 'Password',
               obscure: true,
               controller: passwordController),
           CustomTextField(
               icon: Icons.lock,
-              text: "Confirm Password",
+              text: 'Confirm Password',
               obscure: true,
               controller: confirmPasswordController),
           SizedBox(
             width: 384.0,
             child: CustomBoxButton(
-              title: "Next",
+              title: 'Next',
               function: goToNextPage,
             ),
           )
