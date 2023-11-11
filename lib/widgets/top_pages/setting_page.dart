@@ -34,16 +34,10 @@ class _SettingsPageState extends State<SettingPage> {
         String imageURL = documentSnapshot.get("imageURL");
         return [firstName, imageURL];
       } else {
-        return [
-          "Gustav",
-          "https://unsplash.com/de/fotos/blauer-und-roter-fisch-unter-wasser-hqu_cf0Yp0w"
-        ];
+        return ["Admin", "https://t.ly/8prUf"];
       }
     } catch (e) {
-      return [
-        "Gustav",
-        "https://unsplash.com/de/fotos/blauer-und-roter-fisch-unter-wasser-hqu_cf0Yp0w"
-      ];
+      return ["Admin", "https://t.ly/8prUf"];
     }
   }
 
