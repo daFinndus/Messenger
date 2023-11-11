@@ -13,6 +13,9 @@ class NewsPage extends StatefulWidget {
 class _MyWidgetState extends State<NewsPage> {
   NewsAPI client = NewsAPI();
 
+// FIXME: Builder doesn't work yet
+// Only the CPI is displayed
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
