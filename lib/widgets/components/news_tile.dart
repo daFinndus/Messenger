@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/services/news/news_article.dart';
+import 'package:messenger/services/news/news_api.dart';
 
 class CustomNewsTile extends StatefulWidget {
   final NewsArticle newsArticle;
@@ -11,6 +12,9 @@ class CustomNewsTile extends StatefulWidget {
 }
 
 class _CustomNewsTileState extends State<CustomNewsTile> {
+
+  NewsAPI client = NewsAPI();
+
   @override
   Widget build(BuildContext context) {
     return Container(
