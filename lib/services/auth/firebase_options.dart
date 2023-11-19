@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -49,20 +46,30 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAsknbtz3DFVv-W7LMYsH6YnOHL_NoyuQY',
+    appId: '1:523096348418:web:7414df455a8d1dd35c541b',
+    messagingSenderId: '523096348418',
+    projectId: 'easychat-8ad9a',
+    authDomain: 'easychat-8ad9a.firebaseapp.com',
+    storageBucket: 'easychat-8ad9a.appspot.com',
+    measurementId: 'G-N4LGMQBKTZ',
+  );
+
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBct0M1Bl1lFSrp02KunsSku9gAzzbkCx4',
-    appId: '1:533959909775:android:84a536caa641b25cababfa',
-    messagingSenderId: '533959909775',
-    projectId: 'swift-messenger-68de8',
-    storageBucket: 'swift-messenger-68de8.appspot.com',
+    apiKey: 'AIzaSyCw92Xz9vRMr-1wFNYhQ8bMhzTcUWyr5Ho',
+    appId: '1:523096348418:android:4597c410196f31385c541b',
+    messagingSenderId: '523096348418',
+    projectId: 'easychat-8ad9a',
+    storageBucket: 'easychat-8ad9a.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBMc42TzRBsIbyALHDvqYoD3vLD5SH2ICg',
-    appId: '1:533959909775:ios:aff9d57a8575c773ababfa',
-    messagingSenderId: '533959909775',
-    projectId: 'swift-messenger-68de8',
-    storageBucket: 'swift-messenger-68de8.appspot.com',
+    apiKey: 'AIzaSyDzTsVSkHYWRWFeAz1H44wdx_nP3Xabl7A',
+    appId: '1:523096348418:ios:af7f8ca52e05fbbe5c541b',
+    messagingSenderId: '523096348418',
+    projectId: 'easychat-8ad9a',
+    storageBucket: 'easychat-8ad9a.appspot.com',
     iosBundleId: 'dafinndus.de.messenger',
   );
 }

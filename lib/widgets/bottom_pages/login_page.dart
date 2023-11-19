@@ -42,17 +42,17 @@ class _LoginPageState extends State<LoginPage> {
       if (context.mounted) {
         Navigator.pop(context);
       }
-      if (e.code == "user-not-found") {
+      if (e.code == 'user-not-found') {
         if (context.mounted) {
-          displayErrorMessage(context, "The entered user data wasn't found");
+          displayErrorMessage(context, 'The entered user data was not found');
         }
-      } else if (e.code == "wrong-password") {
+      } else if (e.code == 'wrong-password') {
         if (context.mounted) {
-          displayErrorMessage(context, "The password is incorrect");
+          displayErrorMessage(context, 'The password is incorrect');
         }
-      } else if (e.code == "invalid-email") {
+      } else if (e.code == 'invalid-email') {
         if (context.mounted) {
-          displayErrorMessage(context, "The entered email is invalid");
+          displayErrorMessage(context, 'The entered email is invalid');
         }
       } else {
         if (context.mounted) {
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
           CircleAvatar(
             radius: 64.0,
             backgroundColor: AppColors.brightColor,
-            backgroundImage: const AssetImage("assets/logos/ic_launcher.png"),
+            backgroundImage: const AssetImage('assets/logos/ic_launcher.png'),
           ),
           const SizedBox(
             height: 16.0,
@@ -106,12 +106,12 @@ class _LoginPageState extends State<LoginPage> {
           ),
           CustomTextField(
               icon: Icons.email,
-              text: "Email",
+              text: 'Email',
               obscure: false,
               controller: emailController),
           CustomTextField(
               icon: Icons.lock,
-              text: "Password",
+              text: 'Password',
               obscure: true,
               controller: passwordController),
           const SizedBox(
@@ -119,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           SizedBox(
             width: 384.0,
-            child: CustomBoxButton(title: "Sign in", function: loginUser),
+            child: CustomBoxButton(title: 'Sign in', function: loginUser),
           ),
         ],
       ),

@@ -22,19 +22,19 @@ class _ChatListState extends State<ChatList> {
   // Get the data of all available users except the current user
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection("users").snapshots(),
+      stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text("Something went wrong");
+          return const Text('Something went wrong');
         }
 
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text("Loading..");
+          return const Text('Loading..');
         }
 
         return ListView(
           children: snapshot.data!.docs
-              .map<Widget>((doc) => _buildUserListItem(doc))
+              .map<Widget>((document) => _buildUserListItem(document))
               .toList(),
         );
       },
@@ -61,7 +61,7 @@ class _ChatListState extends State<ChatList> {
             radius: 24.0,
             backgroundImage: NetworkImage(data["imageURL"]),
           ),
-          title: data["firstName"] != null
+          title: data["firstName"].toString().isNotEmpty
               ? Text(data["firstName"] + " " + data["lastName"])
               : const Text("Unknown User"),
           onTap: () {
@@ -70,7 +70,7 @@ class _ChatListState extends State<ChatList> {
               MaterialPageRoute(
                 builder: (context) => ChatPage(
                   title: data["firstName"] + " " + data["lastName"],
-                  imagePath: data["imageURL"],
+                  imageURL: data["imageURL"],
                   receiverUserEmail: data["email"],
                   receiverUserID: data["uid"],
                 ),

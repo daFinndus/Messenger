@@ -15,9 +15,11 @@ class _GreetPage extends State<GreetPage> {
   bool _greetState = false;
 
   void greetStateToggle() {
-    setState(() {
-      _greetState = !_greetState;
-    });
+    setState(
+      () {
+        _greetState = !_greetState;
+      },
+    );
   }
 
   @override
@@ -28,7 +30,7 @@ class _GreetPage extends State<GreetPage> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             opacity: 0.3,
-            image: AssetImage("assets/images/background.png"),
+            image: AssetImage('assets/images/background.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -46,14 +48,14 @@ class _GreetPage extends State<GreetPage> {
               Visibility(
                 visible: _greetState,
                 child: CustomTextButton(
-                  title: "Not a user yet? Sign up.",
+                  title: 'Not a user yet? Sign up.',
                   function: greetStateToggle,
                 ),
               ),
               Visibility(
                 visible: !_greetState,
                 child: CustomTextButton(
-                  title: "User already? Sign in.",
+                  title: 'User already? Sign in.',
                   function: greetStateToggle,
                 ),
               )
