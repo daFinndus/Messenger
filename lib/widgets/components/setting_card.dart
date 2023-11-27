@@ -22,7 +22,7 @@ class _CustomSettingCardState extends State<CustomSettingCard> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 82.0,
+      height: 84.0,
       margin: const EdgeInsets.all(24.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
