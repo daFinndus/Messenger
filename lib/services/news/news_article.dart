@@ -1,7 +1,7 @@
 import 'package:messenger/services/news/news_source.dart';
 
 class NewsArticle {
-  String source;
+  NewsSource source;
   String author;
   String title;
   String description;
@@ -23,7 +23,7 @@ class NewsArticle {
 
   factory NewsArticle.fromJson(Map<String, dynamic> json) {
     return NewsArticle(
-      source: NewsSource.fromJson(json['source']).name,
+      source: NewsSource.fromJson(json['source']),
       author: json['author'] as String,
       title: json['title'] as String,
       description: json['description'] as String,

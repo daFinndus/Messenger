@@ -1,8 +1,8 @@
 class NewsSource {
-  String id;
-  String name;
+  String? id;
+  String? name;
 
-  NewsSource({required this.id, required this.name});
+  NewsSource({this.id, this.name});
 
   factory NewsSource.fromJson(Map<String, dynamic> json) {
     return NewsSource(
