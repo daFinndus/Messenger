@@ -46,7 +46,6 @@ class _CustomNewsTileState extends State<CustomNewsTile> {
                 image: DecorationImage(
                   image: NetworkImage(widget.newsArticle.urlToImage),
                 ),
-                borderRadius: BorderRadius.circular(16.0),
               ),
             ),
             const SizedBox(
