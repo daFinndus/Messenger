@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:messenger/constants/app_colors.dart';
 import 'package:messenger/services/news/news_article.dart';
 
 class NewsArticlePage extends StatelessWidget {
@@ -10,6 +11,7 @@ class NewsArticlePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(newsArticle.title),
+        backgroundColor: AppColors.primaryColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

@@ -70,18 +70,6 @@ class _SettingsPageState extends State<SettingPage> {
                 function: () => routeToPage(const EditProfilePage()),
               ),
               CustomSettingBox(
-                title: 'Themes',
-                function: () => routeToPage(const ThemePage()),
-              ),
-              CustomSettingBox(
-                title: 'Change Password',
-                function: () => routeToPage(const ChangePasswordPage()),
-              ),
-              CustomSettingBox(
-                title: 'Imprint',
-                function: () => routeToPage(const ImprintPage()),
-              ),
-              CustomSettingBox(
                 title: 'Sign Out',
                 function: FirebaseAuth.instance.signOut,
               ),
