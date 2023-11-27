@@ -6,7 +6,7 @@ import 'package:messenger/services/news/news_article.dart';
 class NewsAPI {
   // NOTE: Change country based on your location
   final newsURL =
-      "https://newsapi.org/v2/top-headlines?country=de&apiKey=fe6d8765ae134045b52b4e5fa62eeb0e";
+      "https://newsapi.org/v2/top-headlines?country=us&apiKey=fe6d8765ae134045b52b4e5fa62eeb0e";
 
   Future<List<NewsArticle>> getArticle() async {
     Response res = await get(Uri.parse(newsURL));

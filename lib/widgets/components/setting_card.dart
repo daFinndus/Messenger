@@ -33,8 +33,8 @@ class _CustomSettingCardState extends State<CustomSettingCard> {
             child: CachedNetworkImage(
               imageUrl: widget.imageURL,
               imageBuilder: (context, imageProvider) => Container(
-                width: 52.0,
-                height: 52.0,
+                width: 46.0,
+                height: 46.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image:

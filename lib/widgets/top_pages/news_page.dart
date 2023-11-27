@@ -14,7 +14,7 @@ class _MyWidgetState extends State<NewsPage> {
   NewsAPI client = NewsAPI();
 
 // FIXME: Builder doesn't work yet
-// Only the CPI is displayed
+// Only the circular progress indicator is displayed
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +29,11 @@ class _MyWidgetState extends State<NewsPage> {
               newsArticle: articles[index],
             ),
           );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
       },
     );
   }
