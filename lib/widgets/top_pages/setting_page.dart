@@ -3,10 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:messenger/widgets/components/setting_box.dart';
 import 'package:messenger/widgets/components/setting_card.dart';
-import 'package:messenger/widgets/bottom_pages/change_password_page.dart';
 import 'package:messenger/widgets/bottom_pages/edit_profile_page.dart';
-import 'package:messenger/widgets/bottom_pages/imprint_page.dart';
-import 'package:messenger/widgets/bottom_pages/theme_page.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
