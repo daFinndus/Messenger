@@ -13,9 +13,6 @@ class NewsPage extends StatefulWidget {
 class _MyWidgetState extends State<NewsPage> {
   NewsAPI client = NewsAPI();
 
-// FIXME: Builder doesn't work yet
-// Only the CPI is displayed
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -25,14 +22,16 @@ class _MyWidgetState extends State<NewsPage> {
         if (snapshot.hasData) {
           List<NewsArticle> articles = snapshot.data!;
           return ListView.builder(
+            itemCount: articles.length,
             itemBuilder: (context, index) => CustomNewsTile(
               newsArticle: articles[index],
             ),
           );
+        } else {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
       },
     );
   }

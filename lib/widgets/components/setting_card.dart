@@ -21,20 +21,23 @@ class _CustomSettingCardState extends State<CustomSettingCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(32.0),
+      width: double.infinity,
+      height: 84.0,
+      margin: const EdgeInsets.all(24.0),
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(56.0),
+          borderRadius: BorderRadius.circular(8.0),
           color: AppColors.primaryColor),
       child: Row(
         children: [
           Container(
+            width: 48.0,
             margin: const EdgeInsets.only(right: 16.0),
             child: CachedNetworkImage(
               imageUrl: widget.imageURL,
               imageBuilder: (context, imageProvider) => Container(
-                width: 52.0,
-                height: 52.0,
+                width: 48.0,
+                height: 48.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image:

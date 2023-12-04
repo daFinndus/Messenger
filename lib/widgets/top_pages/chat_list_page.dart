@@ -25,13 +25,13 @@ class _ChatListState extends State<ChatList> {
       stream: FirebaseFirestore.instance.collection('users').snapshots(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return const Text('Something went wrong');
+          return Text("Error: ${snapshot.error}");
         }
-
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Text('Loading..');
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
-
         return ListView(
           children: snapshot.data!.docs
               .map<Widget>((document) => _buildUserListItem(document))
