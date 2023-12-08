@@ -41,7 +41,7 @@ class _CustomNewsTileState extends State<CustomNewsTile> {
           children: [
             Container(
               width: double.infinity,
-              height: 200.0,
+              height: 196.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: NetworkImage(widget.newsArticle.urlToImage),
