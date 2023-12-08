@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,18 +44,33 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 72.0,
+        iconTheme: IconThemeData(
+          color: AppColors.brightColor,
+        ),
         title: Row(
           children: [
             Container(
-              margin: const EdgeInsets.only(right: 8.0),
-              child: CircleAvatar(
-                radius: 24.0,
-                backgroundImage: NetworkImage(
-                  widget.imageURL,
+              margin: const EdgeInsets.only(right: 16.0),
+              width: 44.0,
+              height: 44.0,
+              child: CachedNetworkImage(
+                imageUrl: widget.imageURL,
+                imageBuilder: (context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
+                  ),
                 ),
+                placeholder: (context, url) =>
+                    const CircularProgressIndicator(),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
             ),
-            Text(widget.title)
+            Text(
+              widget.title,
+              style: TextStyle(color: AppColors.brightColor),
+            )
           ],
         ),
         backgroundColor: AppColors.primaryColor,

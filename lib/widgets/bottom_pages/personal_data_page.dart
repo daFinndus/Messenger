@@ -30,7 +30,9 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
   final lastNameController = TextEditingController();
 
   XFile? image; // Store the image
+  String imageURL = ""; // Store the image URL
   String imageName = ""; // Store the name of the image
+
   bool imageExistent = false; // Check if the user has a profile picture
 
   // DateTime variable to store the selectedDate
@@ -61,7 +63,7 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
         // Create the user
         await registerUser();
 
-        String imageURL = await uploadImage();
+        await uploadImage();
 
         // Store user details
         await addUserDetails(
@@ -160,12 +162,10 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
 
   Future<String> uploadImage() async {
     // Create a reference of our firebase storage
-    Reference storageReference = FirebaseStorage.instance
+    Reference imageReference = FirebaseStorage.instance
         .ref()
-        .child("profile_pictures/${FirebaseAuth.instance.currentUser?.uid}");
-
-    // Create a reference of the file we want to upload
-    Reference imageReference = storageReference.child(imageName);
+        .child("profile_pictures/${FirebaseAuth.instance.currentUser?.uid}")
+        .child(imageName);
 
     // Handle errors
     try {
@@ -174,9 +174,9 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
         await image!.readAsBytes(),
         SettableMetadata(contentType: 'image/jpeg'),
       );
+
       // Store the download url in the database
-      String imageURL = await imageReference.getDownloadURL();
-      return imageURL;
+      imageURL = await imageReference.getDownloadURL();
     } catch (e) {
       if (context.mounted) {
         displayErrorMessage(context, e.toString());
@@ -233,18 +233,21 @@ class _PersonalDataPageState extends State<PersonalDataPage> {
                   color: AppColors.brightColor,
                   borderRadius: BorderRadius.circular(32.0),
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(32.0),
-                  child: imageExistent
-                      ? Image.file(
-                          File(image!.path),
-                          fit: BoxFit.cover,
-                        )
-                      : Icon(
-                          Icons.person_rounded,
-                          size: 96.0,
-                          color: AppColors.primaryColor,
-                        ),
+                child: GestureDetector(
+                  onTap: () => pickImage(ImageSource.gallery),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(32.0),
+                    child: imageExistent
+                        ? Image.file(
+                            File(image!.path),
+                            fit: BoxFit.cover,
+                          )
+                        : Icon(
+                            Icons.person_rounded,
+                            size: 96.0,
+                            color: AppColors.primaryColor,
+                          ),
+                  ),
                 ),
               ),
               Row(
