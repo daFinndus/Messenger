@@ -32,12 +32,11 @@ class _CustomSettingCardState extends State<CustomSettingCard> {
         children: [
           Container(
             width: 48.0,
+            height: 48.0,
             margin: const EdgeInsets.only(right: 16.0),
             child: CachedNetworkImage(
               imageUrl: widget.imageURL,
               imageBuilder: (context, imageProvider) => Container(
-                width: 48.0,
-                height: 48.0,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image:
