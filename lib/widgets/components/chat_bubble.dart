@@ -16,7 +16,6 @@ class ChatBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(minWidth: 96.0, maxWidth: 188.0),
       margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 4.0),
       padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
       decoration: BoxDecoration(

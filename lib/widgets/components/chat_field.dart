@@ -22,7 +22,6 @@ class ChatField extends StatelessWidget {
         obscureText: obscureText,
         decoration: InputDecoration(
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16.0),
             borderSide: BorderSide(
               color: AppColors.primaryColor,
               width: 1.0,

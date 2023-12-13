@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,9 +58,21 @@ class _ChatListState extends State<ChatList> {
           textColor: AppColors.brightColor,
           titleTextStyle:
               const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-          leading: CircleAvatar(
-            radius: 24.0,
-            backgroundImage: NetworkImage(data["imageURL"]),
+          leading: SizedBox(
+            width: 48.0,
+            height: 48.0,
+            child: CachedNetworkImage(
+              imageUrl: data["imageURL"],
+              imageBuilder: (context, imageProvider) => Container(
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  image:
+                      DecorationImage(image: imageProvider, fit: BoxFit.cover),
+                ),
+              ),
+              placeholder: (context, url) => const CircularProgressIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
           title: data["firstName"].toString().isNotEmpty
               ? Text(data["firstName"] + " " + data["lastName"])

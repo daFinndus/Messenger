@@ -19,9 +19,12 @@ class _CustomSettingBoxState extends State<CustomSettingBox> {
       height: 64.0,
       child: ElevatedButton(
         onPressed: () => widget.function(),
-        style: TextButton.styleFrom(
+        style: ElevatedButton.styleFrom(
           backgroundColor: AppColors.brightColor,
           padding: const EdgeInsets.all(12.0),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.zero,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -12,15 +12,16 @@ class TabPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: DefaultTabController(
+        initialIndex: 1,
         length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: AppColors.primaryColor,
-            bottom: const TabBar(
+            bottom: TabBar(
               tabs: [
-                Tab(icon: Icon(Icons.newspaper)),
-                Tab(icon: Icon(Icons.chat)),
-                Tab(icon: Icon(Icons.settings)),
+                Tab(icon: Icon(Icons.newspaper, color: AppColors.brightColor)),
+                Tab(icon: Icon(Icons.chat, color: AppColors.brightColor)),
+                Tab(icon: Icon(Icons.settings, color: AppColors.brightColor)),
               ],
             ),
             title: Text(
