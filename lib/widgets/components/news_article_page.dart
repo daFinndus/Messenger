@@ -46,7 +46,7 @@ class NewsArticlePage extends StatelessWidget {
               height: 16.0,
             ),
             InkWell(
-              onTap: () => launchUrl(Uri.parse('https://www.google.com')),
+              onTap: () => launchUrl(Uri.parse(newsArticle.url)),
               child: const Text(
                 'Read more',
                 style: TextStyle(
